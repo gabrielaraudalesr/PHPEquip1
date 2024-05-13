@@ -1,0 +1,41 @@
+Entidad-Relacion Projecto Interdisciplinario 1 DAM
+
+Usuarios {id_usuario, nombre, apellidos, correo_electronico, contrasena, poblacion, fecha_nacimiento, imagen_perfil}
+CP: (id_usuario)
+
+Elementos {id_elemento, tipo_elemento, año, titulo, duracion, temporadas, interpretes, direccion, sinopsis, imagen}
+CP: (id_elemento)
+
+Subidas {id_subida, id_usuario, id_elemento, fecha}
+CP: (id_subida)
+Caj: (id_usuario) Referencia a Usuarios
+Caj: (id_elemento) Referencia a Elementos
+
+Listas_Personales {id_lista, id_usuario}
+CP: (id_lista)
+Caj: (id_usuario) Referencia a Usuarios
+
+Elementos_Lista {id_elemento_lista, id_lista, id_elemento}
+CP: (id_elemento_lista)
+Caj: (id_lista) Referencia a Listas_Personales
+Caj: (id_elemento) Referencia a Elementos
+
+Valoraciones {id_valoracion, id_usuario, id_elemento, valoracion}
+CP: (id_valoracion)
+Caj: (id_usuario) Referencia a Usuarios
+Caj: (id_elemento) Referencia a Elementos
+
+Opiniones {id_opinion, id_usuario, id_elemento, opinion}
+CP: (id_opinion)
+Caj: (id_usuario) Referencia a Usuarios
+Caj: (id_elemento) Referencia a Elementos
+
+Mensajes {id_mensaje, id_emisor, id_receptor, texto, fecha}
+CP: (id_mensaje)
+Caj: (id_emisor) Referencia a Usuarios
+Caj: (id_receptor) Referencia a Usuarios
+
+Usuarios_Mensajes {id_usuario_mensaje, id_usuario, id_mensaje, leido}
+CP: (id_usuario_mensaje)
+Caj: (id_usuario) Referencia a Usuarios
+Caj: (id_mensaje) Referencia a Mensajes
