@@ -19,14 +19,16 @@
                 <input type="text" id="user" required placeholder="Usuario:">
                 <label for="contraseña">Contraseña: </label>
                 <input type="password" id="pass" required placeholder="Contraseña:">
+                <label for="contraseña">Confirma Contraseña: </label>
+                <input type="password" id="pass2" required placeholder="Contraseña:">
                 <label for="poblacion">Poblacion: </label>
                 <input type="text" id="poblacion" required placeholder="Poblacion:">
                 <label for="fecha">Fecha de nacimiento: </label>
                 <input type="date" id="fecha" required>
-                <article id="botones">
+                <article class="botones">
                     <button  id="enviar" class="btn">Enviar</button>
                     <button id="borrar" class="btn">Borrar</button>
-                    <button id="login" class="btn">Login</button>
+                    <button onclick="window.location.href='login.html'" id="login" class="btn">Login</button>
                 </article>
                 
             </form>
