@@ -50,6 +50,6 @@ input:hover{
     background-color: rgba(0, 0, 0, 0.473);
     color: white;
 }
-#botones>button{
+.botones>button{
 width: 20%;
 }

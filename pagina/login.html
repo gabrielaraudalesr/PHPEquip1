@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <script src="./js/script.js"></script>
     <title>Administrador</title>
 </head>
+
 <body>
     <div id="page">
         <div id="header">
@@ -19,10 +21,14 @@
                 <input type="text" id="user" required placeholder="Usuario:">
                 <label for="contraseña">Contraseña: </label>
                 <input type="password" id="pass" required placeholder="Contraseña:">
-                <button  id="btn">Enviar</button>
+                <div class="botones">
+                    <button id="enviar" class="btn">Enviar</button>
+                    <button onclick="window.location.href='registro.html'" id="volver" class="btn">Volver</button>
+                </div>
             </form>
 
         </div>
     </div>
 </body>
+
 </html>
