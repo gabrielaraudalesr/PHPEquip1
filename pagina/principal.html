@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/estiloPrincipal.css">
+    <link rel="stylesheet" href="./css/principal.css">
+    <script src="./js/principal.js"></script>
+
+    <title>Página principal</title>
+</head>
+<body>
+    
+    <div id="Creacion/Modificacion/Eliminacion">
+        <h1>Acciones a hacer</h1>
+        
+        <button onclick="mostrarFormulario('formCrear')">Crear usuario</button>
+        <button onclick="mostrarFormulario('formModificar')">Modificar usuario</button>
+        <button onclick="mostrarFormulario('formEliminar')">Eliminar usuario</button>
+
+    </div>
+
+    <div id="formCrear" class="formulario">
+        <h2>Crear Usuario</h2>
+        <form>
+            <label for="nombreCrear">Nombre:</label>
+            <input type="text" id="nombreCrear" name="nombreCrear"><br><br>
+            <input type="submit" value="Crear">
+        </form>
+    </div>
+
+    <div id="formModificar" class="formulario">
+        <h2>Modificar Usuario</h2>
+        <form>
+            <label for="nombreModificar">Nombre:</label>
+            <input type="text" id="nombreModificar" name="nombreModificar"><br><br>
+            <input type="submit" value="Modificar">
+        </form>
+    </div>
+
+    <div id="formEliminar" class="formulario">
+        <h2>Eliminar Usuario</h2>
+        <form>
+            <label for="nombreEliminar">Nombre:</label>
+            <input type="text" id="nombreEliminar" name="nombreEliminar"><br><br>
+            <input type="submit" value="Eliminar">
+        </form>
+    </div>
+    
+</body>
+</html>
