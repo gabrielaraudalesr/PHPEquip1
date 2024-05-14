@@ -1,3 +1,21 @@
-.formulario {
-    display: none; /* Ocultar formularios inicialmente */
+.formulario, .log, #listaUsuarios, #busquedaUsuarios {
+    display: none; /* Ocultar secciones inicialmente */
+}
+.log table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.log th, .log td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+#gridContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+.gridItem {
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
 }
