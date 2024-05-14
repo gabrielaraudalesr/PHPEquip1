@@ -17,8 +17,8 @@ form{
     padding: 10px;
     margin: 10px;
     border: 1px solid white;
-    border-radius: 10px 10px 10px 10px;
-    box-shadow: 1px 1px 1px 1px white;
+    border-radius: 20px 20px 10px 10px;
+    box-shadow: 5px 5px 10px 1px rgb(117, 117, 117);
 }
 button{
     margin: 10px;
@@ -26,6 +26,14 @@ button{
     width: 25%;
 }
 label,input{
+    width: 75%;
+    margin: 5px;
+}
+input{
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 20px 20px 20px 20px ;
+    padding: 10px;
     width: 75%;
     margin: 5px;
 }
