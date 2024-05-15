@@ -2,6 +2,14 @@ body{
     background-color: rgb(232, 240, 247);
     /*font-family: 'Courier New', Courier, monospace;*/
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#page{
+    width: 90%;
+    height: 90%;
+    
 }
 #formularioContenedor{
     display: flex;
@@ -23,10 +31,7 @@ body{
     box-shadow: 5px 5px 10px 1px rgb(117, 117, 117);
 }
 
-label,input{
-    width: 50%;
-    margin: 5px;
-}
+
 input,.btn{
     cursor: pointer;
     border: 1px solid rgb(167, 167, 167);
@@ -52,4 +57,11 @@ input:hover{
 }
 .botones>button{
 width: 20%;
+}
+.datosPersonales{
+    display: flex;
+    width: 100%;
+}
+.datosPersonales label{
+    width: 50%;
 }
