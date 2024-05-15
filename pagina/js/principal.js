@@ -1,3 +1,11 @@
+window.onload = function ocultar() {
+    let div = document.getElementsByClassName("formulario");
+    for (let i = 0; i < div.length; i++) {
+        div[i].style.display = "none";
+    }
+};
+
+
 const usuarios = [
     { nombre: "Juan Perez" },
     { nombre: "Maria Lopez" },
