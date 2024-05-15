@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 
-$host = "169.254.202.129";
+$host = "localhost";
 $usuario = "root";
 $pass="";
 $bd = "proyectoaplicacioncliente";
