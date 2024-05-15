@@ -1,13 +1,15 @@
 window.addEventListener("DOMContentLoaded",function(e){
 
     var boton = document.getElementById("enviar");
-    var borrar = document.getElementById("borrar");
     var usuario = document.getElementById("user");
+    var nombre = document.getElementById("nombre");
+    var apellido = document.getElementById("apellido");
     var password = document.getElementById("pass");
     var password2 = document.getElementById("pass2");
     var form = document.getElementById("formulario");
     var poblacion = document.getElementById("poblacion");
     var fecha = document.getElementById("fecha");
+    var perfil = document.getElementById("imagen");
 
     boton.addEventListener("click",function(e){
         e.preventDefault();
@@ -16,6 +18,7 @@ window.addEventListener("DOMContentLoaded",function(e){
         var mensaje1 = document.createElement("label");
         var mensaje2 = document.createElement("label");
         var mensaje3 = document.createElement("label");
+        var mensaje4 = document.createElement("label");
 
         if(password.value.length === 0 && usuario.value.length === 0){
             boton.disabled = true;
@@ -53,14 +56,18 @@ window.addEventListener("DOMContentLoaded",function(e){
                 }
                 
             } else {
-                alert("La contraseña debe tener al menos 8 caracteres, con al menos 2 letras minúsculas, 2 letras mayúsculas y 2 dígitos.");
+
+                boton.disabled = true;
+                mensaje4.textContent = "Al menos 8 caracteres, 2 minúsculas, 2 mayúscular y 2 digitos";
+                mensaje4.style.color = "red";
+                mensaje4.setAttribute("id","mensaje4");
+                form.appendChild(mensaje4);
             }
-            
             
             
         };
 
-        if(poblacion.value.length === 0 | fecha.value.length === 0){
+        if(poblacion.value.length === 0 | fecha.value.length === 0 | perfil.value.length === 0 | nombre.value.length === 0 | apellido.value.length === 0){
             boton.disabled = true;
             mensaje3.textContent = "Complete todos los datos";
             mensaje3.style.color = "red";
@@ -69,75 +76,41 @@ window.addEventListener("DOMContentLoaded",function(e){
         }
         
     });
-    borrar.addEventListener("click",function(e){
 
-        usuario.value = "";
-        password.value = "";
-        password2.value = "";
-        poblacion.value = "";
-        fecha.value = "";
-
-    });
+    function eliminarMensajes(){
+        boton.disabled = false;
+        if(document.getElementById("mensaje")){
+            form.removeChild(mensaje);
+        }
+        if(document.getElementById("mensaje1")){
+            form.removeChild(mensaje1);
+        }
+        if(document.getElementById("mensaje2")){
+            form.removeChild(mensaje2);
+        }
+        if(document.getElementById("mensaje3")){
+            form.removeChild(mensaje3);
+        }
+        if(document.getElementById("mensaje4")){
+            form.removeChild(mensaje4);
+        }
+    }
 
     usuario.addEventListener("focus",function(e){
+        eliminarMensajes();
         boton.disabled = false;
-        if(document.getElementById("mensaje")){
-            form.removeChild(mensaje);
-        }
-        if(document.getElementById("mensaje1")){
-            form.removeChild(mensaje1);
-        }
-        if(document.getElementById("mensaje2")){
-            form.removeChild(mensaje2);
-        }
-        if(document.getElementById("mensaje3")){
-            form.removeChild(mensaje3);
-        }
     });
     password.addEventListener("focus",function(e){
-        boton.disabled = false;
-        if(document.getElementById("mensaje")){
-            form.removeChild(mensaje);
-        }
-        if(document.getElementById("mensaje1")){
-            form.removeChild(mensaje1);
-        }
-        if(document.getElementById("mensaje2")){
-            form.removeChild(mensaje2);
-        }
-        if(document.getElementById("mensaje3")){
-            form.removeChild(mensaje3);
-        }
+        eliminarMensajes();
     });
     poblacion.addEventListener("focus",function(e){
-        boton.disabled = false;
-        if(document.getElementById("mensaje")){
-            form.removeChild(mensaje);
-        }
-        if(document.getElementById("mensaje1")){
-            form.removeChild(mensaje1);
-        }
-        if(document.getElementById("mensaje2")){
-            form.removeChild(mensaje2);
-        }
-        if(document.getElementById("mensaje3")){
-            form.removeChild(mensaje3);
-        }
+        eliminarMensajes();
     });
     fecha.addEventListener("focus",function(e){
-        boton.disabled = false;
-        if(document.getElementById("mensaje")){
-            form.removeChild(mensaje);
-        }
-        if(document.getElementById("mensaje1")){
-            form.removeChild(mensaje1);
-        }
-        if(document.getElementById("mensaje2")){
-            form.removeChild(mensaje2);
-        }
-        if(document.getElementById("mensaje3")){
-            form.removeChild(mensaje3);
-        }
+        eliminarMensajes();
+    });
+    perfil.addEventListener("focus",function(e){
+        eliminarMensajes();
     });
 
 });

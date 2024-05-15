@@ -1,7 +1,7 @@
 
 body{
     background-color: rgb(232, 240, 247);
-    background: linear-gradient(rgb(232, 240, 247), rgba(255, 255, 255, 0.568)) no-repeat;
+    background: linear-gradient(rgba(232, 240, 247, 0.856), rgba(255, 255, 255, 0.568)) no-repeat;
     /*font-family: 'Courier New', Courier, monospace;*/
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: flex;
