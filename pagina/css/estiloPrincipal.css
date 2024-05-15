@@ -1,5 +1,6 @@
 body{
     background-color: rgb(232, 240, 247);
+    background: linear-gradient(320deg, rgb(223, 230, 236), rgb(232, 260, 247));
     /*font-family: 'Courier New', Courier, monospace;*/
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: flex;
