@@ -1,13 +1,5 @@
-.formulario, .log, #listaUsuarios, #busquedaUsuarios {
+.formulario, #busquedaUsuarios, #listaUsuarios {
     display: none; /* Ocultar secciones inicialmente */
-}
-.log table {
-    width: 100%;
-    border-collapse: collapse;
-}
-.log th, .log td {
-    border: 1px solid #ddd;
-    padding: 8px;
 }
 #gridContainer {
     display: grid;
