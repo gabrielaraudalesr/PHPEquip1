@@ -11,6 +11,8 @@ window.addEventListener("DOMContentLoaded",function(e){
     var fecha = document.getElementById("fecha");
     var perfil = document.getElementById("imagen");
 
+    
+
     boton.addEventListener("click",function(e){
         e.preventDefault();
         
