@@ -60,7 +60,6 @@ function restaurarBackup() {
     alert("Datos restaurados con éxito.");
     // Aquí iría la lógica para restaurar los datos desde una copia de seguridad
 }
-
 function mostrarLog() {
     // Simulación de un log de acciones
     const logs = [
