@@ -14,15 +14,27 @@ const usuarios = [
     { nombre: "Luis Martinez" }
 ]; // Simulación de base de datos
 
-function mostrarFormulario(id) {
+function mostrarForm(id) {
     // Ocultar todos los formularios
     document.querySelectorAll('.formulario').forEach(form => {
         form.style.display = 'none';
     });
 
-    // Mostrar el formulario correspondiente
     document.getElementById(id).style.display = 'block';
+
+    
+
+    var botonCerrar = document.getElementById("cerrar");
+botonCerrar.addEventListener("click",function(e){
+
+var form = document.getElementById("formCrear");
+form.style.display="none";
+
+});
+
+
 }
+
 
 function mostrarListaUsuarios() {
     const listaDiv = document.getElementById('listaUsuarios');

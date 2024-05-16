@@ -22,7 +22,7 @@ while($fila=mysqli_fetch_array($resultado)){
     $correo=$fila["Correo"];
     $imagenPerfil=$fila["Imagen Perfil"];
     
-    print "<tr><td>" . $id . "</td><td>" . $nombre . "</td><td>" . $precio . "</td><td>" . $descripcion . "</td></tr>"; 
+    print "<tr><td>" . $id . "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $descripcion . "</td></tr>"; 
     
 }
 print "</table>";
