@@ -15,7 +15,7 @@
             <header>
                 <h1>Registro</h1>
             </header>
-            <form action="pagina.php" method="post" id="formulario">
+            <form action="./php/pagina.php" method="post" id="formulario">
                 <label for="usuario">Usuario: </label>
                 <input type="text" id="user" required placeholder="Usuario:">
                 <article class="datosPersonales">
@@ -23,19 +23,19 @@
                     <label for="apellido">Apellido: </label>
                 </article>
                 <article class="datosPersonales"> 
-                    <input type="text" id="nombre" required placeholder="Nombre:">
-                    <input type="text" id="apellido" required placeholder="Apellidos:">
+                    <input type="text" id="nombre" name="nombre" required placeholder="Nombre:">
+                    <input type="text" id="apellido" name="apellido" required placeholder="Apellidos:">
                 </article>
                 <label for="contraseña">Contraseña: </label>
-                <input type="password" id="pass" required placeholder="Contraseña:">
+                <input type="password" id="pass" name="contraseña" required placeholder="Contraseña:">
                 <label for="contraseña2">Confirma Contraseña: </label>
                 <input type="password" id="pass2" required placeholder="Contraseña:">
                 <label for="poblacion">Poblacion: </label>
-                <input type="text" id="poblacion" required placeholder="Poblacion:">
+                <input type="text" id="poblacion" name="poblacion" required placeholder="Poblacion:">
                 <label for="telefono">Telefono movil: </label>
-                <input type="number" id="telefono" required placeholder="Telefono:">
+                <input type="number" id="telefono" name="telefono"  required placeholder="Telefono:">
                 <label for="fecha">Fecha de nacimiento: </label>
-                <input type="date" id="fecha" required>
+                <input type="date" id="fecha" name="fecha" required>
                 <label for="perfil">Imagen de perfil: </label>
                 <input type="file" id="imagen">
                 <article class="botones">
