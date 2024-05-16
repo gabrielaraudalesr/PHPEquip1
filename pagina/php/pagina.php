@@ -1,7 +1,7 @@
 <?php
 include 'funciones.php';
 
-comprobarConexion($bd);
+comprobarConexion($conexion);
 
 
 

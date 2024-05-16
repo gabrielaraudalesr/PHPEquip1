@@ -1,5 +1,6 @@
 <?php 
 include 'datos.php';
+
 $conexion = mysqli_connect($host,$usuario,$pass,$bd,$port);
 
 function comprobarConexion($conexion){
@@ -13,7 +14,7 @@ function comprobarConexion($conexion){
     
 }
 
-comprobarConexion($conexion);
+
 
 $nombre=$_POST['nombre'];
 $apellido=$_POST['apellido'];
