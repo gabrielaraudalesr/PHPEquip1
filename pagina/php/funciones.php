@@ -13,18 +13,22 @@ function comprobarConexion($conexion){
 
     
 }
+    $fechaNacimiento=$_POST['fecha'];
+
+    print $fechaNacimiento;
+function agregar(){
+    /*$nombre=$_POST['nombre'];
+    $apellido=$_POST['apellido'];
+    $contraseña=$_POST['contraseña'];
+    $poblacion=$_POST['poblacion'];*/
+    $fechaNacimiento=$_POST['fecha'];
+
+    print $fechaNacimiento;
+}
 
 
 
-$nombre=$_POST['nombre'];
-$apellido=$_POST['apellido'];
-$contraseña=$_POST['contraseña'];
-$poblacion=$_POST['poblacion'];
-$fechaNacimiento=$_POST['fechaNacimiento'];
-
-print $fechaNacimiento;
-
-$consulta="SELECT * FROM usuarios";
+$consulta="SELECT * FROM Usuarios";
 $resultado=mysqli_query($conexion,$consulta);
 
 print "<table border>";
