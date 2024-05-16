@@ -3,7 +3,7 @@
 $host = "localhost";
 $usuario = "root";
 $pass="";
-$bd = "proyectoaplicacioncliente";
+$bd = "ProyectoAplicacionCliente";
 $port = 3306;
 
 ?>
