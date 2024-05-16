@@ -6,7 +6,7 @@ $pass="";
 $bd = "proyectoaplicacioncliente";
 $port = 3306;
 
-$conexion = mysqli_connect($host,$usuario,$pass,$bd,$port);
+/*$conexion = mysqli_connect($host,$usuario,$pass,$bd,$port);
 
 $consulta="SELECT * FROM usuarios";
 $resultado=mysqli_query($conexion,$consulta);
@@ -25,6 +25,6 @@ while($fila=mysqli_fetch_array($resultado)){
     print "<tr><td>" . $id . "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contraseña . "</td><td>" . $poblacion . "</td><td>" . $fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr>"; 
     
 }
-print "</table>";
+print "</table>";*/
 
 ?>
