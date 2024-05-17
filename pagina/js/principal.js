@@ -6,7 +6,49 @@ window.onload = function ocultar() {
 };
 
 function listarUsuarios() {
-    $.ajax({
+    const xhttp = new XMLHttpRequest();
+    
+    if (this.readyState == 4 && this.status == 200) {
+        
+        // Cuando la solicitud esté completada y la respuesta sea exitosa
+        
+        var listaUsuarios= JSON.parse(this.responseText);
+            var tablaUsuarios = "<table><thead><tr><th>ID Usuario</th><th>Nombre</th><th>Apellido</th><th>Contraseña</th><th>Poblacion</th><th>Fecha Nacimiento</th><th>Correo</th></tr></thead><tbody>";
+            for (var i = 0; i < listaUsuarios.length; i++) {
+                tablaUsuarios += "<tr>";
+                tablaUsuarios += "<td>" + listaUsuarios[i].IDUsuario + "</td>";
+                tablaUsuarios += "<td>" + listaUsuarios[i].Nombre + "</td>";
+                tablaUsuarios += "<td>" + listaUsuarios[i].Apellido + "</td>";
+                tablaUsuarios += "<td>" + listaUsuarios[i].Contrasena + "</td>";
+                tablaUsuarios += "<td>" + listaUsuarios[i].Poblacion + "</td>";
+                tablaUsuarios += "<td>" + listaUsuarios[i].FechaNacimiento + "</td>";
+                tablaUsuarios += "<td>" + listaUsuarios[i].Correo + "</td>";
+                tablaUsuarios += "</tr>";
+            }
+            tablaUsuarios += "</tbody></table>";
+            document.getElementById('resultadoListaUsuarios').style.display = 'block';
+            document.getElementById("resultadoListaUsuarios").innerHTML = tablaUsuarios;
+    }
+    xhttp.open("POST", "./php/pagina.php", true);
+    var param= "accion=listarUsuarios";
+    xhttp.responseType="json";
+    xhttp.send(param);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*$.ajax({
         
         url: "../php/pagina.php",
         type: "POST",
@@ -30,7 +72,7 @@ function listarUsuarios() {
             $('#resultadoListaUsuarios').html(tablaUsuarios);
             
         }
-    });
+    });*/
     
 }
 

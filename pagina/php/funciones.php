@@ -27,7 +27,7 @@ function listarUsuarios(){
         $lista=array();
         while($fila=mysqli_fetch_assoc($resultado)){
 
-            $lista[]= $fila;
+            $lista[]=$fila;
 
             /*$id=$fila["IDUsuario"];
             $usuario=$fila["Usuario"];
@@ -37,12 +37,14 @@ function listarUsuarios(){
             $poblacion=$fila["Poblacion"];
             $fechaNacimiento=$fila["FechaNacimiento"];
             $correo=$fila["Correo"];
-            $imagenPerfil=$fila["ImagenPerfil"];*/
+            $imagenPerfil=$fila["ImagenPerfil"];
             
-        //$lista += "<tr><td>" . $id . "</td><td>" . $usuario. "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contrasena . "</td><td>" . $poblacion . "</td><td>" . $fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr>"; 
-            
+        $lista += "<tr><td>" . $id . "</td><td>" . $usuario. "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contrasena . "</td><td>" . $poblacion . "</td><td>" . $fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr>"; 
+            */
         }
+        //$lista+="</table>";
         return $lista;
+        
     }
     
 

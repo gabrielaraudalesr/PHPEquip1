@@ -10,8 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if(isset($_POST['accion']) && $_POST['accion'] == 'listarUsuarios') {
         // Procesar la solicitud AJAX
 
-        $listaUsuarios=listarUsuarios();
-        echo json_encode($listaUsuarios);
+        $listaUsuarios=json_encode(listarUsuarios());
+        echo $listarUsuarios;
         
         exit;
     }
