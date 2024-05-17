@@ -1,38 +1,25 @@
 <?php 
 include 'datos.php';
-//Establece la conexion con la base de datos
-$conexion = mysqli_connect($host,$usuario,$pass,$bd,$port);
 
-function comprobarConexion($conexion){
-    
-    if (!$conexion) {
-        echo "<p>Conexion fallida</p> <br>";
-    } else {
-        echo "<p>Conexion correcta</p> <br>";
-    }
-
-    
-}
-
-function comprobarLogin($conexion, $usuario, $contrasena){
-    
-    $consulta="SELECT Usuario, Contrasena FROM usuarios";
+//Funcion que comprueba que el usuario y contraseña están correctamente
+function comprobarLogin($correo, $contrasena){
+    $conexion=conectarBD();
+    $consulta="SELECT Correo, Contrasena FROM usuarios";
     $resultado=mysqli_query($conexion,$consulta);
 
     while ($fila=mysqli_fetch_array($resultado)) {
-        if ($usuario == $fila['Usuario']) {
+        if ($correo == $fila['Correo']) {
             if (password_verify($contrasena, $fila['Contrasena'])) {
                print "Puta madre socio, tas dentro";
-            } else {
-                print "contraseña mal";
             }
-        } else {
-            print "usuario mal";
         }
     }
+    mysqli_close($conexion);
 }
 //Funcion usada para hacer una lista de los usuarios de la base de datos
-function listarUsuario($conexion){
+function listarUsuario(){
+    
+    $conexion=conectarBD();
     $consulta="SELECT * FROM usuarios";
     $resultado=mysqli_query($conexion,$consulta);
 
@@ -52,29 +39,27 @@ function listarUsuario($conexion){
         
     }
     print "</table>";
+
+    //cierra la conexion con la base de datos al finalizar la ejecucion para prevenir los problemas de recursos
+    mysqli_close($conexion);
 }
 //Funcion que añade usuarios a la base de datos
-function agregarUsuario($conexion, $usuario, $nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento){
+function agregarUsuario($nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento, $correo){
+    $conexion=conectarBD();
     $contrasena=encriptar($contrasena);
-    $consulta= "INSERT INTO usuarios (Usuario, Nombre, Apellido, Contrasena, Poblacion, FechaNacimiento, Correo) VALUES ('$usuario', '$nombre', '$apellido', '$contrasena', '$poblacion', '$fechaNacimiento', 'correo2');";
+    $consulta= "INSERT INTO usuarios (Nombre, Apellido, Contrasena, Poblacion, FechaNacimiento, Correo) VALUES ('$nombre', '$apellido', '$contrasena', '$poblacion', '$fechaNacimiento', '$correo');";
     if (mysqli_query($conexion, $consulta) === TRUE) {
         print "<p>Persona registrada correctamente</p>";
     } else {
         print "<p>Persona registrada incorrectamente</p>";
     }
+    mysqli_close($conexion);
 }
 //Funcion que encripta la contraseña
 function encriptar($password){
-    /*$iterations = 600;
-
-    // Generate a cryptographically secure random salt using random_bytes()
-    $salt = random_bytes(16);
-
-    $hash = hash_pbkdf2("sha256", $password, $salt, $iterations, 20);
-    //var_dump($hash);
-    return $hash;*/
 
     return password_hash($password, 1);
+    
 }
 
 

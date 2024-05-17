@@ -16,11 +16,12 @@
             <form action="./php/pagina.php" method="post" id="formulario">
                 <input type="hidden" name="formulario" value="login">
                 <label for="usuario">Usuario: </label>
-                <input type="text" id="user" name="usuario" required placeholder="Usuario:">
+                <input type="text" id="user" name="correo" required placeholder="Usuario:">
                 <label for="contraseña">Contraseña: </label>
                 <input type="password" id="pass" name="contrasena" required placeholder="Contraseña:">
                 <article class="botones">
-                    <button type="submit" id="enviarr" class="btn">Enviar</button>
+                    <!-- usa la misma validacion que el boton de enviar del registro asi que no se valida correctamente -->
+                    <button type="submit" id="enviar" class="btn">Enviar</button>
                     <button onclick="window.location.href='registro.html'" id="volver" class="btn">Volver</button>
                 </article>
             </form>
