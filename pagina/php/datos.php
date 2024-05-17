@@ -3,7 +3,7 @@
 $host = "localhost";
 $usuario = "root";
 $pass="";
-$bd = "ProyectoAplicacionCliente";
+$bd = "streameclipse";
 $port = 3306;
 
 ?>

@@ -20,24 +20,24 @@ function listarUsuario($conexion){
 
     print "<table border>";
     while($fila=mysqli_fetch_array($resultado)){
-        $id=$fila["ID_Usuario"];
+        $id=$fila["IDUsuario"];
         $nombre=$fila["Nombre"];
         $apellido=$fila["Apellido"];
-        $contraseña=$fila["Contraseña"];
+        $contrasena=$fila["Contrasena"];
         $poblacion=$fila["Poblacion"];
         $fechaNacimiento=$fila["FechaNacimiento"];
         $correo=$fila["Correo"];
-        $imagenPerfil=$fila["Imagen Perfil"];
+        $imagenPerfil=$fila["ImagenPerfil"];
         
-        print "<tr><td>" . $id . "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contraseña . "</td><td>" . $poblacion . "</td><td>" . $fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr>"; 
+        print "<tr><td>" . $id . "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contrasena . "</td><td>" . $poblacion . "</td><td>" . $fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr>"; 
         
     }
     print "</table>";
 }
-//Funcion que ñade usuarios a la base de datos
-function agregarUsuario($conexion, $nombre, $apellido, $contraseña, $poblacion, $fechaNacimiento){
-    $contraseña=encriptar($contraseña);
-    $consulta= "INSERT INTO usuarios (Nombre, Apellido, Contraseña, Poblacion, FechaNacimiento, Correo) VALUES ('$nombre', '$apellido', '$contraseña', '$poblacion', '$fechaNacimiento', 'correo2');";
+//Funcion que añade usuarios a la base de datos
+function agregarUsuario($conexion, $nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento){
+    $contrasena=encriptar($contrasena);
+    $consulta= "INSERT INTO usuarios (Nombre, Apellido, Contrasena, Poblacion, FechaNacimiento, Correo) VALUES ('$nombre', '$apellido', '$contrasena', '$poblacion', '$fechaNacimiento', 'correo2');";
     if (mysqli_query($conexion, $consulta) === TRUE) {
         print "<p>Persona registrada correctamente</p>";
     } else {
