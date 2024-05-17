@@ -16,8 +16,9 @@
                 <h1>Registro</h1>
             </header>
             <form action="./php/pagina.php" method="post" id="formulario">
+                <input type="hidden" name="formulario" value="registro">
                 <label for="usuario">Usuario: </label>
-                <input type="text" id="user" required placeholder="Usuario:">
+                <input type="text" id="user" name="usuario" required placeholder="Usuario:">
                 <article class="datosPersonales">
                     <label for="nombre">Nombre: </label>
                     <label for="apellido">Apellido: </label>
@@ -27,7 +28,7 @@
                     <input type="text" id="apellido" name="apellido" required placeholder="Apellidos:">
                 </article>
                 <label for="contraseña">Contraseña: </label>
-                <input type="password" id="pass" name="contraseña" required placeholder="Contraseña:">
+                <input type="password" id="pass" name="contrasena" required placeholder="Contraseña:">
                 <label for="contraseña2">Confirma Contraseña: </label>
                 <input type="password" id="pass2" required placeholder="Contraseña:">
                 <label for="poblacion">Poblacion: </label>
@@ -39,7 +40,7 @@
                 <label for="perfil">Imagen de perfil: </label>
                 <input type="file" id="imagen">
                 <article class="botones">
-                    <button id="enviar" class="btn">Enviar</button>
+                    <button type="submit" id="enviar" class="btn">Enviar</button>
                     <button type="reset" id="borrar" class="btn">Borrar</button>
                 </article>
 
