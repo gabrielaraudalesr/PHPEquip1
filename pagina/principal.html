@@ -17,13 +17,13 @@
     <div id="gridContainer">
         <div class="gridItem" id="Listar">
             <h1>Lista de usuarios</h1>
-            <button onclick="mostrarListaUsuarios()">Mostrar lista de usuarios</button>
+            <button id="listarUsuarios" onclick="listarUsuarios()">Mostrar lista de usuarios</button>
             <div id="busquedaUsuarios" onload="ocultar()">
                 <h2>Buscar Usuario</h2>
                 <input type="text" id="buscarNombre" placeholder="Nombre de usuario">
                 <button onclick="buscarUsuario()">Buscar</button>
             </div>
-            <div id="listaUsuarios"></div>
+            <div id="resultadoListaUsuarios"></div>
             
         </div>
 

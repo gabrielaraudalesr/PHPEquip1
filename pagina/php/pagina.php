@@ -1,11 +1,20 @@
 <?php
 include 'funciones.php';
 
-comprobarConexion($conexion);
+
 
 
 //Comprueba que el método es el adecuado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    if(isset($_POST['accion']) && $_POST['accion'] == 'listarUsuarios') {
+        // Procesar la solicitud AJAX
+
+        $listaUsuarios=listarUsuarios();
+        echo json_encode($listaUsuarios);
+        
+        exit;
+    }
 
     //Comprueba cual de los formularios es el que ha enviado datos mediante un campo oculto 'hidden'
     $formulario=$_POST['formulario'];
@@ -37,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $correo=$_POST['correo'];
             $contrasena=$_POST['contrasena'];
             comprobarLogin($correo, $contrasena);
-            
+
             break;
         
         default:

@@ -17,28 +17,34 @@ function comprobarLogin($correo, $contrasena){
     mysqli_close($conexion);
 }
 //Funcion usada para hacer una lista de los usuarios de la base de datos
-function listarUsuario(){
+function listarUsuarios(){
     
     $conexion=conectarBD();
     $consulta="SELECT * FROM usuarios";
     $resultado=mysqli_query($conexion,$consulta);
+    
+    if (mysqli_num_rows($resultado) > 0) {
+        $lista=array();
+        while($fila=mysqli_fetch_assoc($resultado)){
 
-    print "<table border>";
-    while($fila=mysqli_fetch_array($resultado)){
-        $id=$fila["IDUsuario"];
-        $usuario=$fila["Usuario"];
-        $nombre=$fila["Nombre"];
-        $apellido=$fila["Apellido"];
-        $contrasena=$fila["Contrasena"];
-        $poblacion=$fila["Poblacion"];
-        $fechaNacimiento=$fila["FechaNacimiento"];
-        $correo=$fila["Correo"];
-        $imagenPerfil=$fila["ImagenPerfil"];
-        
-        print "<tr><td>" . $id . "</td><td>" . $usuario. "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contrasena . "</td><td>" . $poblacion . "</td><td>" . $fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr>"; 
-        
+            $lista[]= $fila;
+
+            /*$id=$fila["IDUsuario"];
+            $usuario=$fila["Usuario"];
+            $nombre=$fila["Nombre"];
+            $apellido=$fila["Apellido"];
+            $contrasena=$fila["Contrasena"];
+            $poblacion=$fila["Poblacion"];
+            $fechaNacimiento=$fila["FechaNacimiento"];
+            $correo=$fila["Correo"];
+            $imagenPerfil=$fila["ImagenPerfil"];*/
+            
+        //$lista += "<tr><td>" . $id . "</td><td>" . $usuario. "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contrasena . "</td><td>" . $poblacion . "</td><td>" . $fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr>"; 
+            
+        }
+        return $lista;
     }
-    print "</table>";
+    
 
     //cierra la conexion con la base de datos al finalizar la ejecucion para prevenir los problemas de recursos
     mysqli_close($conexion);
@@ -59,7 +65,7 @@ function agregarUsuario($nombre, $apellido, $contrasena, $poblacion, $fechaNacim
 function encriptar($password){
 
     return password_hash($password, 1);
-    
+
 }
 
 

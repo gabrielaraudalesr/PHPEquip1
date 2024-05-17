@@ -5,6 +5,40 @@ window.onload = function ocultar() {
     }
 };
 
+function listarUsuarios() {
+    $.ajax({
+        
+        url: "../php/pagina.php",
+        type: "POST",
+        data: {accion: "listarUsuarios"},
+        success: function(response){
+            var listaUsuarios= JSON.parse(response);
+            var tablaUsuarios = "<table><thead><tr><th>ID Usuario</th><th>Nombre</th><th>Apellido</th><th>Contraseña</th><th>Poblacion</th><th>Fecha Nacimiento</th><th>Correo</th></tr></thead><tbody>";
+            for (var i = 0; i < listaUsuarios.length; i++) {
+                tablaUsuarios += "<tr>";
+                tablaUsuarios += "<td>" + listaUsuarios[i].IDUsuario + "</td>";
+                tablaUsuarios += "<td>" + listaUsuarios[i].Nombre + "</td>";
+                tablaUsuarios += "<td>" + listaUsuarios[i].Apellido + "</td>";
+                tablaUsuarios += "<td>" + listaUsuarios[i].Contrasena + "</td>";
+                tablaUsuarios += "<td>" + listaUsuarios[i].Poblacion + "</td>";
+                tablaUsuarios += "<td>" + listaUsuarios[i].FechaNacimiento + "</td>";
+                tablaUsuarios += "<td>" + listaUsuarios[i].Correo + "</td>";
+                tablaUsuarios += "</tr>";
+            }
+            tablaUsuarios += "</tbody></table>";
+            document.getElementById('resultadoListaUsuarios').style.display = 'block';
+            $('#resultadoListaUsuarios').html(tablaUsuarios);
+            
+        }
+    });
+    
+}
+
+/*$(document).ready(function(){
+    $("#listarUsuarios").click(function () {
+        listarUsuarios();
+    })
+});*/
 
 const usuarios = [
     { nombre: "Juan Perez" },
