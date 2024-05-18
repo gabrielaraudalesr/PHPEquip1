@@ -1,10 +1,9 @@
 window.onload = function ocultar() {
-    let div = document.getElementsByClassName("formulario");
-    for (let i = 0; i < div.length; i++) {
-        div[i].style.display = "none";
+    let divs = document.getElementsByClassName("formulario");
+    for (let i = 0; i < divs.length; i++) {
+        divs[i].style.display = "none";
     }
 };
-
 
 const usuarios = [
     { nombre: "Juan Perez" },
@@ -20,21 +19,18 @@ function mostrarForm(id) {
         form.style.display = 'none';
     });
 
+    // Mostrar el formulario solicitado
     document.getElementById(id).style.display = 'block';
-
-    
-
-    var botonCerrar = document.getElementById("cerrar");
-botonCerrar.addEventListener("click",function(e){
-
-var form = document.getElementById("formCrear");
-form.style.display="none";
-
-});
-
-
 }
 
+// Configurar el botón de cerrar al cargar la página
+document.addEventListener('DOMContentLoaded', function () {
+    var botonCerrar = document.getElementById("cerrar");
+    botonCerrar.onclick = function () {
+        var form = document.getElementById("formCrear");
+        form.style.display = "none";
+    };
+});
 
 function mostrarListaUsuarios() {
     const listaDiv = document.getElementById('listaUsuarios');
@@ -58,7 +54,7 @@ function buscarUsuario() {
     const listaDiv = document.getElementById('listaUsuarios');
 
     // Filtrar usuarios por nombre
-    const usuariosFiltrados = usuarios.filter(usuario => 
+    const usuariosFiltrados = usuarios.filter(usuario =>
         usuario.nombre.toLowerCase().includes(nombreBusqueda)
     );
 
@@ -80,6 +76,7 @@ function restaurarBackup() {
     alert("Datos restaurados con éxito.");
     // Aquí iría la lógica para restaurar los datos desde una copia de seguridad
 }
+
 function mostrarLog() {
     // Simulación de un log de acciones
     const logs = [

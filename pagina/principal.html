@@ -19,7 +19,7 @@
         <a href="./index.html"> <img id="imagenLogo" src="./img/StreamEclipseLogobyDesigner.png" alt=""></a>
         <div id="contenedorFlex">
             <div class="primeraFila" id="Listar">
-                <div id="listarUsuarios">
+                <div id="listarUsuarios" class="apartados">
 
 
                     <h1>Lista de usuarios</h1>
@@ -33,16 +33,12 @@
                 </div>
 
 
-                <div id="creacionModificacionEliminacion">
+                <div id="creacionModificacionEliminacion" class="apartados">
                     <h1>Acciones a hacer</h1>
                     <button onclick="mostrarForm('formCrear')">Crear usuario</button>
                     <button>Modificar usuario</button>
                     <button>Eliminar usuario</button>
-                    <div id="formCrear" class="formulario">
-                        <button id="cerrar">X</button>
-                        <iframe id="registro" src="./registro.html"></iframe>
-
-                    </div>
+                    
 
                     <div id="formModificar" class="formulario">
                         <h2>Modificar Usuario</h2>
@@ -68,7 +64,7 @@
             <div class="segundaFila">
 
 
-                <div id="logAcciones">
+                <div id="logAcciones" class="apartados">
                     <h2>Registro de Acciones</h2>
                     <button onclick="mostrarLog()">Mostrar log de acciones</button>
                     <div id="logContent">
@@ -76,12 +72,17 @@
                     </div>
                 </div>
 
-                <div id="backupRestore">
+                <div id="backupRestore" class="apartados">
                     <h2>Copia o Restauración de Seguridad</h2>
                     <button onclick="crearBackup()">Crear copia de seguridad</button>
                     <button onclick="restaurarBackup()">Restaurar datos</button>
                 </div>
             </div>
+        </div>
+        <div id="formCrear" class="formulario">
+            <button id="cerrar">X</button>
+            <iframe id="registro" src="./registro.html"></iframe>
+
         </div>
     </div>
 </body>
