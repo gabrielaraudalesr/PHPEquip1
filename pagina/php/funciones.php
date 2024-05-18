@@ -1,5 +1,6 @@
 <?php 
 include 'datos.php';
+include './PHPEquip1/';
 
 //Funcion que comprueba que el usuario y contraseña están correctamente
 function comprobarLogin($correo, $contrasena){
@@ -20,7 +21,7 @@ function comprobarLogin($correo, $contrasena){
 function listarUsuarios(){
     
     $conexion=conectarBD();
-    $consulta="SELECT * FROM usuarios";
+    $consulta="SELECT * FROM Usuarios";
     $resultado=mysqli_query($conexion,$consulta);
     
     if (mysqli_num_rows($resultado) > 0) {
