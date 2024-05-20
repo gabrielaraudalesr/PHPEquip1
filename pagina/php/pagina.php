@@ -1,17 +1,17 @@
 <?php
-include 'funciones.php';
+include './funciones.php';
 
 
 
 
 //Comprueba que el método es el adecuado
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
 
     if(isset($_POST['accion']) && $_POST['accion'] == 'listarUsuarios') {
         // Procesar la solicitud AJAX
 
-        $listaUsuarios=json_encode(listarUsuarios());
-        echo $listarUsuarios;
+        
+        print listarUsuarios();
         
         exit;
     }
@@ -49,6 +49,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             break;
         
+
+        case 'lista';
+
+            print listarUsuarios();
+
+        break;
         default:
             
             break;

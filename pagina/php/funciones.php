@@ -1,6 +1,5 @@
 <?php 
 include 'datos.php';
-include './PHPEquip1/';
 
 //Funcion que comprueba que el usuario y contraseña están correctamente
 function comprobarLogin($correo, $contrasena){
@@ -21,17 +20,15 @@ function comprobarLogin($correo, $contrasena){
 function listarUsuarios(){
     
     $conexion=conectarBD();
-    $consulta="SELECT * FROM Usuarios";
+    
+    $consulta="SELECT `IDUsuario`,`Nombre`,`Apellido`,`Contrasena`,`Poblacion`,DATE_FORMAT(`FechaNacimiento`, '%d-%m-%Y') 'FechaNacimiento',`Correo`,`ImagenPerfil` FROM usuarios";
     $resultado=mysqli_query($conexion,$consulta);
     
-    if (mysqli_num_rows($resultado) > 0) {
-        $lista=array();
-        while($fila=mysqli_fetch_assoc($resultado)){
+    
+        $lista="<table border=1><thead><tr><th>ID Usuario</th><th>Nombre</th><th>Apellido</th><th>Contraseña</th><th>Poblacion</th><th>Fecha Nacimiento</th><th>Correo</th></tr></thead><tbody>";
+        while($fila=mysqli_fetch_array($resultado)){            
 
-            $lista[]=$fila;
-
-            /*$id=$fila["IDUsuario"];
-            $usuario=$fila["Usuario"];
+            $id=$fila["IDUsuario"];
             $nombre=$fila["Nombre"];
             $apellido=$fila["Apellido"];
             $contrasena=$fila["Contrasena"];
@@ -40,13 +37,14 @@ function listarUsuarios(){
             $correo=$fila["Correo"];
             $imagenPerfil=$fila["ImagenPerfil"];
             
-        $lista += "<tr><td>" . $id . "</td><td>" . $usuario. "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contrasena . "</td><td>" . $poblacion . "</td><td>" . $fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr>"; 
-            */
+        $lista .= "<tr><td>" . $id . "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contrasena . "</td><td>" . $poblacion . "</td><td>" . $fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr>"; 
+            
         }
-        //$lista+="</table>";
+        $lista.="</table>";
+        
         return $lista;
         
-    }
+    
     
 
     //cierra la conexion con la base de datos al finalizar la ejecucion para prevenir los problemas de recursos
