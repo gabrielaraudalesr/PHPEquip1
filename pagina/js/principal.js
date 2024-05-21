@@ -5,38 +5,6 @@ window.onload = function ocultar() {
     }
 };
 
-/*function listarUsuarios() {
-    const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "./php/pagina.php");
-    var param= "accion=listarUsuarios";
-    xhttp.send(param);
-    if (this.readyState == 4 && this.status == 200) {
-        
-        // Cuando la solicitud esté completada y la respuesta sea exitos
-            
-            
-            document.getElementById('resultadoListaUsuarios').style.display = 'block';
-            document.getElementById("resultadoListaUsuarios").innerHTML = this.response;
-    }
-    
-    $.ajax({
-        
-        url: "./php/pagina.php",
-        type: "POST",
-        data: {action: "listarUsuarios"},
-        success: function(response){
-            
-            document.getElementById('resultadoListaUsuarios').style.display = 'block';
-            $('#resultadoListaUsuarios').html(tablaUsuarios);
-            
-        }
-    });  
-}
-/*$(document).ready(function(){
-    $("#listarUsuarios").click(function() {
-        listarUsuarios();
-    })
-});*/
 
 const usuarios = [
     { nombre: "Juan Perez" },

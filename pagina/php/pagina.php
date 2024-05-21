@@ -7,15 +7,6 @@ include './funciones.php';
 //Comprueba que el método es el adecuado
 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
 
-    if(isset($_POST['accion']) && $_POST['accion'] == 'listarUsuarios') {
-        // Procesar la solicitud AJAX
-
-        
-        print listarUsuarios();
-        
-        exit;
-    }
-
     //Comprueba cual de los formularios es el que ha enviado datos mediante un campo oculto 'hidden'
     $formulario=$_POST['formulario'];
     switch ($formulario) {
@@ -35,7 +26,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             echo "<button onclick='volverAlLogin()'>Ir a la página de inicio de sesión</button>
             <script>
                 function volverAlLogin() {
-                    // Redireccionar a la página de inicio de sesión
+                    //Redireccionar a la página de inicio de sesión
                     window.location.href = '../login.html';
                 }
             </script>";
@@ -46,7 +37,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             $correo=$_POST['correo'];
             $contrasena=$_POST['contrasena'];
             comprobarLogin($correo, $contrasena);
-
+            
             break;
         
 

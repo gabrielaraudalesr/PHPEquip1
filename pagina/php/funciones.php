@@ -10,8 +10,20 @@ function comprobarLogin($correo, $contrasena){
     while ($fila=mysqli_fetch_array($resultado)) {
         if ($correo == $fila['Correo']) {
             if (password_verify($contrasena, $fila['Contrasena'])) {
-               print "Puta madre socio, tas dentro";
+               header("Location: ../principal.html");
+            } else {
+                session_start();
+                $_SESSION['correo_temp'] = isset($_POST['correo']) ? $_POST['correo'] : '';
+                $_SESSION['error']="Usuario o contraseña incorrectos";
+                header("Location: ../login.php");
+                
             }
+        } else {
+            session_start();
+            $_SESSION['correo_temp'] = isset($_POST['correo']) ? $_POST['correo'] : '';
+            $_SESSION['error']="Usuario o contraseña incorrectos";
+            header("Location: ../login.php");
+            
         }
     }
     mysqli_close($conexion);
