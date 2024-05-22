@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-   
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta HTTP-EQUIV="Access-Control-Allow-Origin" CONTENT="">
-    <link rel="stylesheet" href="./css/estiloPrincipal.css">
     <link rel="stylesheet" href="./css/principal.css">
     <script src="./js/principal.js"></script>
 
@@ -13,23 +12,25 @@
 </head>
 
 <body>
-    <img id="imagenLogo" src="./img/StreamEclipseLogobyDesigner.png" alt="">
-    <div id="gridContainer">
-        <div class="gridItem" id="Listar">
-            <h1>Lista de usuarios</h1>
-            <form action="./php/pagina.php" method="post">
-                <input type="hidden" name="formulario" value="lista">
-                <button id="listarUsuarios" class="btn">Mostrar lista de usuarios</button>
-            </form>
-            
-            <div id="busquedaUsuarios" onload="ocultar()">
-                <h2>Buscar Usuario</h2>
-                <input type="text" id="buscarNombre" placeholder="Nombre de usuario">
-                <button onclick="buscarUsuario()">Buscar</button>
-            </div>
-            <div id="resultadoListaUsuarios"></div>
-            
-        </div>
+    <header>
+        <h1>STREAMECLIPSE</h1>
+    </header>
+    <div id="paginaPrincipal">
+        <a href="./index.html"> <img id="imagenLogo" src="./img/StreamEclipseLogobyDesigner.png" alt=""></a>
+        <div id="contenedorFlex">
+            <div class="primeraFila" id="Listar">
+                <div id="listarUsuarios" class="apartados">
+
+
+                    <h1>Lista de usuarios</h1>
+                    <button onclick="mostrarListaUsuarios()" class="btn">Mostrar lista de usuarios</button>
+                    <div id="busquedaUsuarios" onload="ocultar()">
+                        <h2>Buscar Usuario</h2>
+                        <input type="text" id="buscarNombre" placeholder="Nombre de usuario">
+                        <button onclick="buscarUsuario()">Buscar</button>
+                    </div>
+                    <div id="listaUsuarios"></div>
+                </div>
 
         <div class="gridItem" id="Creacion/Modificacion/Eliminacion">
             <h1>Acciones a hacer</h1>
@@ -40,26 +41,76 @@
                 <button id="cerrar">X</button>
                 <iframe id="registro" src="./registro.html"></iframe>
                 
+    <header>
+        <h1>STREAMECLIPSE</h1>
+    </header>
+    <div id="paginaPrincipal">
+        <a href="./index.html"> <img id="imagenLogo" src="./img/StreamEclipseLogobyDesigner.png" alt=""></a>
+        <div id="contenedorFlex">
+            <div class="primeraFila" id="Listar">
+                <div id="listarUsuarios" class="apartados">
+
+
+                    <h1>Lista de usuarios</h1>
+                    <button onclick="mostrarListaUsuarios()">Mostrar lista de usuarios</button>
+                    <div id="busquedaUsuarios" onload="ocultar()">
+                        <h2>Buscar Usuario</h2>
+                        <input type="text" id="buscarNombre" placeholder="Nombre de usuario">
+                        <button onclick="buscarUsuario()">Buscar</button>
+                    </div>
+                    <div id="listaUsuarios"></div>
+                </div>
+
+
+                <div id="creacionModificacionEliminacion" class="apartados">
+                    <h1>Acciones a hacer</h1>
+                    <button onclick="mostrarForm('formCrear')">Crear usuario</button>
+                    <button>Modificar usuario</button>
+                    <button>Eliminar usuario</button>
+                    
+
+                    <div id="formModificar" class="formulario">
+                        <h2>Modificar Usuario</h2>
+                        <form>
+                            <label for="nombreModificar">Nombre:</label>
+                            <input type="text" id="nombreModificar" name="nombreModificar"><br><br>
+                            <input type="submit" value="Modificar">
+                        </form>
+                    </div>
+
+                    <div id="formEliminar" class="formulario">
+                        <h2>Eliminar Usuario</h2>
+                        <form>
+                            <label for="nombreEliminar">Nombre:</label>
+                            <input type="text" id="nombreEliminar" name="nombreEliminar"><br><br>
+                            <input type="submit" value="Eliminar">
+                        </form>
+                    </div>
+                </div>
             </div>
-        
-            <div id="formModificar" class="formulario">
-                <h2>Modificar Usuario</h2>
-                <form>
-                    <label for="nombreModificar">Nombre:</label>
-                    <input type="text" id="nombreModificar" name="nombreModificar"><br><br>
-                    <input type="submit" value="Modificar">
-                </form>
-            </div>
-        
-            <div id="formEliminar" class="formulario">
-                <h2>Eliminar Usuario</h2>
-                <form>
-                    <label for="nombreEliminar">Nombre:</label>
-                    <input type="text" id="nombreEliminar" name="nombreEliminar"><br><br>
-                    <input type="submit" value="Eliminar">
-                </form>
+
+
+            <div class="segundaFila">
+
+
+                <div id="logAcciones" class="apartados">
+                    <h2>Registro de Acciones</h2>
+                    <button onclick="mostrarLog()">Mostrar log de acciones</button>
+                    <div id="logContent">
+                        <!-- Aquí se mostrará el log -->
+                    </div>
+                </div>
+
+                <div id="backupRestore" class="apartados">
+                    <h2>Copia o Restauración de Seguridad</h2>
+                    <button onclick="crearBackup()">Crear copia de seguridad</button>
+                    <button onclick="restaurarBackup()">Restaurar datos</button>
+                </div>
             </div>
         </div>
+        <div id="formCrear" class="formulario">
+            <button id="cerrar">X</button>
+            <iframe id="registro" src="./registro.html"></iframe>
 
         
 
@@ -81,8 +132,6 @@
             <button onclick="restaurarBackup()" class="btn" >Restaurar datos</button>
         </div>
     </div>
-
-    
-    
 </body>
+
 </html>

@@ -1,0 +1,17 @@
+#contenedorFooter{
+    position: absolute;
+    bottom: 20%;
+    width: 99%;
+    height: 50px;
+}
+
+#footer{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: #ecf0f1;
+}
+p{
+   
+    padding: 15px;
+}
