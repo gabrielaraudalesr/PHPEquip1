@@ -19,7 +19,7 @@
             <h1>Lista de usuarios</h1>
             <form action="./php/pagina.php" method="post">
                 <input type="hidden" name="formulario" value="lista">
-                <button id="listarUsuarios">Mostrar lista de usuarios</button>
+                <button id="listarUsuarios" class="btn">Mostrar lista de usuarios</button>
             </form>
             
             <div id="busquedaUsuarios" onload="ocultar()">
@@ -33,9 +33,9 @@
 
         <div class="gridItem" id="Creacion/Modificacion/Eliminacion">
             <h1>Acciones a hacer</h1>
-            <button onclick="mostrarForm('formCrear')">Crear usuario</button>
-            <button>Modificar usuario</button>
-            <button>Eliminar usuario</button>
+            <button onclick="mostrarForm('formCrear')" class="btn">Crear usuario</button>
+            <button class="btn">Modificar usuario</button>
+            <button class="btn">Eliminar usuario</button>
             <div id="formCrear" class="formulario">
                 <button id="cerrar">X</button>
                 <iframe id="registro" src="./registro.html"></iframe>
@@ -65,7 +65,11 @@
 
         <div class="gridItem" id="logAcciones">
             <h2>Registro de Acciones</h2>
-            <button onclick="mostrarLog()">Mostrar log de acciones</button>
+            <form action="./php/pagina.php" method="post">
+                <input type="hidden" name="formulario" value="log">
+                <button class="btn">Mostrar log de acciones</button>
+            </form>
+            
             <div id="logContent">
                 <!-- Aquí se mostrará el log -->
             </div>
@@ -73,8 +77,8 @@
 
         <div class="gridItem" id="backupRestore">
             <h2>Copia o Restauración de Seguridad</h2>
-            <button onclick="crearBackup()">Crear copia de seguridad</button>
-            <button onclick="restaurarBackup()">Restaurar datos</button>
+            <button onclick="crearBackup()" class="btn">Crear copia de seguridad</button>
+            <button onclick="restaurarBackup()" class="btn" >Restaurar datos</button>
         </div>
     </div>
 

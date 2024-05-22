@@ -1,5 +1,5 @@
 <?php
-include './funciones.php';
+include 'funciones.php';
 
 
 
@@ -42,9 +42,79 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
         
 
         case 'lista';
+        echo "<style>
+        html{
+            width: 100%;
+            height: 100%;
+            background: rgb(54,79,107);
+            background: radial-gradient(circle, rgba(54,79,107,1) 10%, rgba(59,147,163,1) 20%, rgba(63,193,201,1) 25%, rgba(54,79,107,1) 95%); 
+            position: relative;      
+            z-index: 1;
+        }
+        table{          
+            position: absolute;
+            color: black;
+            z-index: 2;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bold;
+        }
+        p{
+            font-size: 50px;
+            text-align: center; 
+            color: black;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bold;
+        }
+        thead, tbody{
+            text-align:center;
+        }
+        table{
+            justify-content: center;
+        }
+        ";
+        echo "</style>";
+        print "<p>Lista de Usuarios</p>";
+        print listarUsuarios();
 
-            print listarUsuarios();
+        break;
 
+        case 'log';
+            
+            echo "<style>
+            html{
+                width: 100%;
+                height: 100%;
+                background: rgb(54,79,107);
+                background: radial-gradient(circle, rgba(54,79,107,1) 10%, rgba(59,147,163,1) 20%, rgba(63,193,201,1) 25%, rgba(54,79,107,1) 95%); 
+                position: relative;      
+                z-index: 1;
+            }
+            table{          
+                position: absolute;
+                z-index: 2;
+                color: black;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-weight: bold;
+            }
+            p{
+                font-size: 50px;
+                text-align: center; 
+                color: black;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-weight: bold;
+            }
+            thead{
+                text-align:center;
+            }
+            tbody{
+                text-align:center;
+            }
+            ";
+            echo "</style>";
+            print "<p>Log</p>";
+            print mostrarLog();
+            
+            
         break;
         default:
             

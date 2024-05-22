@@ -37,7 +37,7 @@ function listarUsuarios(){
     $resultado=mysqli_query($conexion,$consulta);
     
     
-        $lista="<table border=1><thead><tr><th>ID Usuario</th><th>Nombre</th><th>Apellido</th><th>Contraseña</th><th>Poblacion</th><th>Fecha Nacimiento</th><th>Correo</th></tr></thead><tbody>";
+        $lista="<table border=1 style='border-collapse: collapse;'><thead><tr><th>ID Usuario</th><th>Nombre</th><th>Apellido</th><th>Contraseña</th><th>Poblacion</th><th>Fecha Nacimiento</th><th>Correo</th></tr></thead><tbody>";
         while($fila=mysqli_fetch_array($resultado)){            
 
             $id=$fila["IDUsuario"];
@@ -49,7 +49,7 @@ function listarUsuarios(){
             $correo=$fila["Correo"];
             $imagenPerfil=$fila["ImagenPerfil"];
             
-        $lista .= "<tr><td>" . $id . "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contrasena . "</td><td>" . $poblacion . "</td><td>" . $fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr>"; 
+        $lista .= "<tr><td>" . $id . "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contrasena . "</td><td>" . $poblacion . "</td><td>" . $fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr></tbody>"; 
             
         }
         $lista.="</table>";
@@ -79,6 +79,29 @@ function encriptar($password){
 
     return password_hash($password, 1);
 
+}
+
+
+function mostrarLog(){
+    $conexion=conectarBD();
+    $consulta="SELECT * FROM logs";
+    $resultado=mysqli_query($conexion, $consulta);
+    
+    $tabla="<table border=1 style='border-collapse: collapse;'><thead><tr><th>ID</th><th>Accion</th><th>Fecha-Hora</th></thead><tbody>";
+    while($fila=mysqli_fetch_array($resultado)){
+        $id=$fila["Id"];
+        $accion=$fila["Accion"];
+        $fechaHora=$fila["Fecha-Hora"];
+            
+        $tabla .= "<tr><td>" . $id . "</td><td>" . $accion . "</td><td>" . $fechaHora . "</td></tr></tbody>";
+    }
+    $tabla .= "</table>";
+
+    return $tabla;
+
+        
+    
+    mysqli_close($conexion);
 }
 
 
