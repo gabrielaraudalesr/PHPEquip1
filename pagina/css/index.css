@@ -1,0 +1,40 @@
+html {
+    height: 100%;
+    background: rgb(57, 154, 165);
+    background: linear-gradient(11deg, rgba(57, 154, 165, 1) 0%, rgba(63, 193, 201, 1) 2%, rgba(51, 109, 124, 1) 98%, rgba(44, 62, 80, 1) 100%) no-repeat;
+}
+
+
+@font-face {
+    font-family: 'SirinStencil';
+    font-style: normal;
+    src: url(../fuentes/SirinStencil-Regular.ttf);
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#imagenLogo {
+    width: 20%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+#imagenHorizontal {
+    width: 300px;
+    height: 300px;
+}
+
+h1 {
+    font-family: 'SirinStencil';
+    font-size: 100px;
+    width: 50%;
+    color: #ecf0f1;
+}
