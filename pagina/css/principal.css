@@ -8,6 +8,8 @@
     flex-wrap: wrap;
     flex-grow: inherit;
     flex-flow: wrap;
+    margin: 0%;
+    padding: 0%;
 }
 html {
     width: 100%;
@@ -23,11 +25,12 @@ header {
 header h1 {
     z-index: 1;
     font-family: 'SirinStencil';
-    font-size: 70px;
+    
+    font-size: 60px;
     color: #ecf0f1;
 }
 body {
-    height: 90%;
+    height: 100%;
 }
 .formulario, #busquedaUsuarios, #listaUsuarios {
     display: none; /* Ocultar secciones inicialmente */
@@ -37,27 +40,33 @@ body {
     align-items: center;
     flex-direction: column;
     flex-wrap: nowrap;
-    gap: 20px;
     z-index: 2;
     width: 100%;
 }
 .primeraFila, .segundaFila {
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    padding: 20px;
+    width: 90%;
+    padding-top: 5%;
+    padding-bottom:5%;
     text-align: center;
 }
+.primeraFila h1{
+    margin-bottom: 25px;
+}
+.segundaFila h1{
+    margin-bottom: 25px;
+}
 #listarUsuarios, #creacionModificacionEliminacion, #logAcciones, #backupRestore {
-    width: 33%; /* Ajusta según sea necesario */
-    margin: 50px;
+    width: 30%; /* Ajusta según sea necesario */
+    margin: 15px;
+    
 }
 .apartados {
     border: 0.5px solid black;
     border-radius: 10px;
     background-color: #ecf0f1a9;
-    opacity: 90%;
-    margin: 1px;
+    opacity: 90%;    
 }
 #registro {
     position: absolute;

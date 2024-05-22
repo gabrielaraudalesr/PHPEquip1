@@ -52,11 +52,10 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             z-index: 1;
         }
         table{          
-            position: absolute;
-            color: black;
+            position: absolute;            
             z-index: 2;
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            font-weight: bold;
+            
         }
         p{
             font-size: 50px;
@@ -67,9 +66,17 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
         }
         thead, tbody{
             text-align:center;
+            width:50%
         }
-        table{
-            justify-content: center;
+        thead{
+            font-weight: bold;
+            color:black;
+        }
+        tbody{
+            color:white;
+        }
+        table{           
+            width:99%;
         }
         ";
         echo "</style>";
@@ -81,6 +88,9 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
         case 'log';
             
             echo "<style>
+            body{
+                margin:0;
+            }
             html{
                 width: 100%;
                 height: 100%;
@@ -88,13 +98,14 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
                 background: radial-gradient(circle, rgba(54,79,107,1) 10%, rgba(59,147,163,1) 20%, rgba(63,193,201,1) 25%, rgba(54,79,107,1) 95%); 
                 position: relative;      
                 z-index: 1;
+                
             }
             table{          
                 position: absolute;
                 z-index: 2;
-                color: black;
+                margin: left 0;
                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-                font-weight: bold;
+                width:100%;
             }
             p{
                 font-size: 50px;
@@ -105,9 +116,12 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             }
             thead{
                 text-align:center;
+                color: black;
+                font-weight: bold;
             }
             tbody{
                 text-align:center;
+                color: white;
             }
             ";
             echo "</style>";
