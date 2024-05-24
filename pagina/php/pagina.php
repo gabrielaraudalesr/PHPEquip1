@@ -133,7 +133,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
         break;
 
         case 'modificarUsuario'
-            $nombreUsuario=$_POST['nombreModificar'];
+            $nombreModificar=$_POST['nombreModificar'];
 
 
 
@@ -141,14 +141,16 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             break;
 
         case 'eliminarUsuario'
-            $nombreUsuario=$_POST['nombreEliminar'];
-            $resultado=eliminarUsuario($nombreUsuario);
+            $nombreEliminar=$_POST['nombreEliminar'];
+            $resultado=eliminarUsuario($nombreEliminar);
             if ($resultado === TRUE) {
                 alert("Usuario borrado correctamente");
+                echo "<script>window.onclose = window.location.href = '../principal.html';</script>";
             } else {
                 alert("ERROR, el usuario no existe");
+                echo "<script>window.onclose = window.location.href = '../principal.html';</script>";
             }
-            echo "<script>window.onclose = window.location.href = '../principal.html';</script>";
+            
             
 
 
