@@ -19,8 +19,9 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             $contrasena=$_POST['contrasena'];
             $poblacion=$_POST['poblacion'];
             $fechaNacimiento=$_POST['fecha'];
+            $imagenPerfil=$_POST['imagen'];
             //llama a la funcion que añade un usuario a la base de datos
-            agregarUsuario($nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento, $correo);
+            agregarUsuario($nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento, $correo, $imagenPerfil);
 
             //Crea un botón que lleva a la pagina de login una vez se confirma el registro del usuario
             echo "<button onclick='volverAlLogin()'>Ir a la página de inicio de sesión</button>
@@ -107,7 +108,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
                 width:100%;
             }
-            p{
+            h1  {
                 font-size: 50px;
                 text-align: center; 
                 color: black;
@@ -125,11 +126,33 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             }
             ";
             echo "</style>";
-            print "<p>Log</p>";
+            print "<h1>Log</h1>";
             print mostrarLog();
             
             
         break;
+
+        case 'modificarUsuario'
+            $nombreUsuario=$_POST['nombreModificar'];
+
+
+
+
+            break;
+
+        case 'eliminarUsuario'
+            $nombreUsuario=$_POST['nombreEliminar'];
+            $resultado=eliminarUsuario($nombreUsuario);
+            if ($resultado === TRUE) {
+                alert("Usuario borrado correctamente");
+            } else {
+                alert("ERROR, el usuario no existe");
+            }
+            echo "<script>window.onclose = window.location.href = '../principal.html';</script>";
+            
+
+
+            break;
         default:
             
             break;

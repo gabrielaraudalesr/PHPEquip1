@@ -5,13 +5,13 @@ window.onload = function ocultar() {
     }
 };
 
-const usuarios = [
+/*const usuarios = [
     { nombre: "Juan Perez" },
     { nombre: "Maria Lopez" },
     { nombre: "Carlos Ruiz" },
     { nombre: "Ana Gomez" },
     { nombre: "Luis Martinez" }
-]; // Simulación de base de datos
+];Simulación de base de datos*/
 
 function mostrarForm(id) {
     // Ocultar todos los formularios
@@ -77,7 +77,7 @@ function restaurarBackup() {
     // Aquí iría la lógica para restaurar los datos desde una copia de seguridad
 }
 
-function mostrarLog() {
+/*function mostrarLog() {
     // Simulación de un log de acciones
     const logs = [
         { accion: "Login", usuario: "Juan Perez", fecha: "2024-05-13 10:00" },
@@ -91,4 +91,4 @@ function mostrarLog() {
     });
     logContent += '</table>';
     document.getElementById('logContent').innerHTML = logContent;
-}
+}*/

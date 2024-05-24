@@ -29,8 +29,7 @@
                     </form>
                     
                     <div id="busquedaUsuarios" onload="ocultar()">
-                        <h2>Buscar Usuario</h2>
-                                             
+                        <h2>Buscar Usuario</h2>                                             
                         <input type="text" id="buscarNombre" placeholder="Nombre de usuario">
                         <button onclick="buscarUsuario()">Buscar</button>
                     </div>
@@ -39,25 +38,31 @@
 
 
                 <div id="creacionModificacionEliminacion" class="apartados">
-                    <h1>Acciones a hacer</h1>
+                    <h1>Gestión de Usuarios</h1>
                     <button onclick="mostrarForm('formCrear')">Crear usuario</button>
-                    <button>Modificar usuario</button>
-                    <button>Eliminar usuario</button>
+                    <button onclick="mostrarForm('formModificar')">Modificar usuario</button>
+                    <button onclick="mostrarForm('formEliminar')">Eliminar usuario</button>
                     
 
                     <div id="formModificar" class="formulario">
+                        <br>
                         <h2>Modificar Usuario</h2>
-                        <form>
+                        <br>
+                        <form onload="ocultar()">
                             <label for="nombreModificar">Nombre:</label>
+                            <input type="hidden" name="formulario" value="modificarUsuario">                            
                             <input type="text" id="nombreModificar" name="nombreModificar"><br><br>
                             <input type="submit" value="Modificar">
                         </form>
                     </div>
 
                     <div id="formEliminar" class="formulario">
+                        <br>
                         <h2>Eliminar Usuario</h2>
-                        <form>
+                        <br>
+                        <form onload="ocultar()">
                             <label for="nombreEliminar">Nombre:</label>
+                            <input type="hidden" name="formulario" value="eliminarUsuario">
                             <input type="text" id="nombreEliminar" name="nombreEliminar"><br><br>
                             <input type="submit" value="Eliminar">
                         </form>

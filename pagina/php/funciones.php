@@ -63,10 +63,10 @@ function listarUsuarios(){
     mysqli_close($conexion);
 }
 //Funcion que añade usuarios a la base de datos
-function agregarUsuario($nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento, $correo){
+function agregarUsuario($nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento, $correo, $imagenPerfil){
     $conexion=conectarBD();
     $contrasena=encriptar($contrasena);
-    $consulta= "INSERT INTO usuarios (Nombre, Apellido, Contrasena, Poblacion, FechaNacimiento, Correo) VALUES ('$nombre', '$apellido', '$contrasena', '$poblacion', '$fechaNacimiento', '$correo');";
+    $consulta= "INSERT INTO usuarios (Nombre, Apellido, Contrasena, Poblacion, FechaNacimiento, Correo, ImagenPerfil) VALUES ('$nombre', '$apellido', '$contrasena', '$poblacion', '$fechaNacimiento', '$correo', '$imagenPerfil');";
     if (mysqli_query($conexion, $consulta) === TRUE) {
         print "<p>Persona registrada correctamente</p>";
     } else {
@@ -101,6 +101,20 @@ function mostrarLog(){
 
         
     
+    mysqli_close($conexion);
+}
+
+
+function eliminarUsuario($nombreUsuario){
+    $conexion=conectarBD();
+    $consulta="DELETE FROM usuarios WHERE Nombre='$nombreUsuario'";
+    $resultado=mysqli_query($conexion, $consulta);
+    if ($resultado === TRUE) {
+        print TRUE;
+    } else {
+        print FALSE;
+    }
+
     mysqli_close($conexion);
 }
 
