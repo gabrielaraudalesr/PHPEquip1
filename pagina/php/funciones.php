@@ -106,13 +106,13 @@ function mostrarLog(){
 
 
 function eliminarUsuario($nombreUsuario){
-    $conexion=conectarBD();
-    $consulta="DELETE FROM usuarios WHERE Nombre='$nombreUsuario'";
+    $conexion=conectarBD();    
+    $consulta="DELETE FROM usuarios WHERE Nombre='$nombreUsuario';";
     $resultado=mysqli_query($conexion, $consulta);
-    if ($resultado === TRUE) {
-        print TRUE;
+    if (mysqli_num_rows($resultado)) {
+        return TRUE;
     } else {
-        print FALSE;
+        return FALSE;
     }
 
     mysqli_close($conexion);
