@@ -17,8 +17,14 @@
             </header>
             <form action="./php/pagina.php" method="post" id="formulario">
                 <input type="hidden" name="formulario" value="registro">
-                <label for="usuario">Usuario: </label>
-                <input type="text" id="user" name="correo" required placeholder="Usuario:">
+                <article class="datosPersonales">
+                    <label for="usuario">Usuario: </label>
+                    <label for="correo">Correo: </label>
+                </article>
+                <article class="datosPersonales">
+                    <input type="text" id="user" required placeholder="Usuario:">
+                <input type="text" id="correo" required placeholder="Correo:">
+            </article>
                 <article class="datosPersonales">
                     <label for="nombre">Nombre: </label>
                     <label for="apellido">Apellido: </label>
