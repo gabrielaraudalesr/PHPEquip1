@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/index.css">
+    <script src="./js/index.js" ></script>
     <title>Document</title>
 </head>
 <body>
@@ -11,6 +12,16 @@
         <img id="imagenHorizontal" src="./img/StreamEclipseLogobyDesigner.png" alt="">
         <h1>STREAMECLIPSE</h1>
     </header>
-    
+    <section id="opciones">
+        <article id="registro">
+            <button id="registroBtn" onclick="visualizarRegistro()" >Registrarse</button>
+            <iframe id="iframeRegistro" src="./registro.html" frameborder="0"></iframe>
+        </article>
+        <article id="login">
+            <button id="loginBtn" onclick="visualizarLogin()" >Iniciar sesion</button>
+            <iframe id="iframeLogin" src="./login.html" frameborder="0"></iframe>
+        </article>
+        <button id="cerrar">X</button>
+    </section>
 </body>
 </html>
