@@ -107,14 +107,16 @@ function mostrarLog(){
 
 function eliminarUsuario($nombreUsuario){
     $conexion=conectarBD();    
-    $consulta="DELETE FROM usuarios WHERE Nombre='$nombreUsuario';";
-    $resultado=mysqli_query($conexion, $consulta);
-    if (mysqli_num_rows($resultado)) {
+    $consulta="DELETE FROM usuarios WHERE Nombre=?;";
+    $stmt=mysqli_prepare($conexion, $consulta);
+    mysqli_stmt_bind_param($stmt, "s", $nombreUsuario);
+    mysqli_stmt_execute($stmt);
+    if (mysqli_stmt_affected_rows($stmt)>0) {
         return TRUE;
     } else {
         return FALSE;
     }
-
+    mysqli_stmt_close($stmt);
     mysqli_close($conexion);
 }
 
