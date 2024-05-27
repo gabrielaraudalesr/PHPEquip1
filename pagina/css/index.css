@@ -89,9 +89,10 @@ iframe {
 }
 
 #loginBtn, #registroBtn{
-    margin: 100px;
+margin: 100px;
 width: 200px;
 height: 100px;
+border: 1px solid white;
 border-radius: 50px;
 }
 #loginBtn:hover, #registroBtn:hover{

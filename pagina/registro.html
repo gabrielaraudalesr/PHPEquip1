@@ -16,8 +16,14 @@
                 <h1>Registro</h1>
             </header>
             <form action="pagina.php" method="post" id="formulario">
-                <label for="usuario">Usuario: </label>
-                <input type="text" id="user" required placeholder="Usuario:">
+                <article class="datosPersonales">
+                    <label for="usuario">Usuario: </label>
+                    <label for="correo">Correo: </label>
+                </article>
+                <article class="datosPersonales">
+                    <input type="text" id="user" required placeholder="Usuario:">
+                <input type="text" id="correo" required placeholder="Correo:">
+            </article>
                 <article class="datosPersonales">
                     <label for="nombre">Nombre: </label>
                     <label for="apellido">Apellido: </label>

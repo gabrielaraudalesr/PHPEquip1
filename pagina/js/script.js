@@ -2,6 +2,7 @@ window.addEventListener("DOMContentLoaded",function(e){
 
     var boton = document.getElementById("enviar");
     var usuario = document.getElementById("user");
+    var correo = document.getElementById("correo");
     var nombre = document.getElementById("nombre");
     var apellido = document.getElementById("apellido");
     var password = document.getElementById("pass");
@@ -112,6 +113,9 @@ window.addEventListener("DOMContentLoaded",function(e){
         eliminarMensajes();
     });
     perfil.addEventListener("focus",function(e){
+        eliminarMensajes();
+    });
+    correo.addEventListener("focus",function(e){
         eliminarMensajes();
     });
 
