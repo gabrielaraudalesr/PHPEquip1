@@ -84,8 +84,15 @@
 
                 <div id="backupRestore" class="apartados">
                     <h1>Copia o Restauración</h1>
-                    <button onclick="crearBackup()">Crear copia de seguridad</button>
-                    <button onclick="restaurarBackup()">Restaurar datos</button>
+                    <form action="./php/pagina.php" method="post">
+                        <input type="hidden" name="formulario" value="copia">
+                        <button>Crear copia de seguridad</button>
+                    </form> 
+                    <form action="./php/pagina.php" method="post">
+                        <input type="hidden" name="formulario" value="restaurar">
+                        <button>Restaurar datos</button>
+                    </form>
+                    
                 </div>
             </div>
         </div>

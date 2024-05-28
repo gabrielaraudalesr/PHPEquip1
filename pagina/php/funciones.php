@@ -1,31 +1,56 @@
 <?php 
-include 'datos.php';
+include './datos.php';
 
 //Funcion que comprueba que el usuario y contraseña están correctamente
-function comprobarLogin($correo, $contrasena){
+function comprobarLogin($user, $contrasena){
     $conexion=conectarBD();
-    $consulta="SELECT Correo, Contrasena FROM usuarios";
-    $resultado=mysqli_query($conexion,$consulta);
+    if (strpos($user, '@') === TRUE) {
+        $consulta="SELECT Correo, Contrasena FROM usuarios";
+        $resultado=mysqli_query($conexion,$consulta);
 
-    while ($fila=mysqli_fetch_array($resultado)) {
-        if ($correo == $fila['Correo']) {
-            if (password_verify($contrasena, $fila['Contrasena'])) {
-               header("Location: ../principal.html");
+        while ($fila=mysqli_fetch_array($resultado)) {
+            if ($user == $fila['Correo']) {
+                if (password_verify($contrasena, $fila['Contrasena'])) {
+                header("Location: ../principal.html");
+                } else {
+                    session_start();
+                    $_SESSION['user_temp'] = isset($_POST['user']) ? $_POST['user'] : '';
+                    $_SESSION['error']="Usuario o contraseña incorrectos";
+                    header("Location: ../login.php");                    
+                }
             } else {
                 session_start();
-                $_SESSION['correo_temp'] = isset($_POST['correo']) ? $_POST['correo'] : '';
+                $_SESSION['user_temp'] = isset($_POST['user']) ? $_POST['user'] : '';
+                $_SESSION['error']="Usuario o contraseña incorrectos";
+                header("Location: ../login.php");                
+            }
+        }
+    } else {
+        $consulta="SELECT Usuario, Contrasena FROM usuarios";
+        $resultado=mysqli_query($conexion,$consulta);
+
+        while ($fila=mysqli_fetch_array($resultado)) {
+            if ($user == $fila['Usuario']) {
+                if (password_verify($contrasena, $fila['Contrasena'])) {
+                header("Location: ../principal.html");
+                } else {
+                    session_start();
+                    $_SESSION['user_temp'] = isset($_POST['user']) ? $_POST['user'] : '';
+                    $_SESSION['error']="Usuario o contraseña incorrectos";
+                    header("Location: ../login.php");
+                    
+                }
+            } else {
+                session_start();
+                $_SESSION['user_temp'] = isset($_POST['user']) ? $_POST['user'] : '';
                 $_SESSION['error']="Usuario o contraseña incorrectos";
                 header("Location: ../login.php");
                 
             }
-        } else {
-            session_start();
-            $_SESSION['correo_temp'] = isset($_POST['correo']) ? $_POST['correo'] : '';
-            $_SESSION['error']="Usuario o contraseña incorrectos";
-            header("Location: ../login.php");
-            
         }
     }
+    
+    
     mysqli_close($conexion);
 }
 //Funcion usada para hacer una lista de los usuarios de la base de datos
@@ -63,14 +88,14 @@ function listarUsuarios(){
     mysqli_close($conexion);
 }
 //Funcion que añade usuarios a la base de datos
-function agregarUsuario($nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento, $correo, $imagenPerfil){
+function agregarUsuario($nombreUsuario, $nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento, $correo, $imagenPerfil){
     $conexion=conectarBD();
     $contrasena=encriptar($contrasena);
-    $consulta= "INSERT INTO usuarios (Nombre, Apellido, Contrasena, Poblacion, FechaNacimiento, Correo, ImagenPerfil) VALUES ('$nombre', '$apellido', '$contrasena', '$poblacion', '$fechaNacimiento', '$correo', '$imagenPerfil');";
+    $consulta= "INSERT INTO usuarios (Usuario, Nombre, Apellido, Contrasena, Poblacion, FechaNacimiento, Correo, ImagenPerfil) VALUES ('$nombreUsuario', '$nombre', '$apellido', '$contrasena', '$poblacion', '$fechaNacimiento', '$correo', '$imagenPerfil');";
     if (mysqli_query($conexion, $consulta) === TRUE) {
-        print "<p>Persona registrada correctamente</p>";
+        //print "<p>Persona registrada correctamente</p>";
     } else {
-        print "<p>Persona registrada incorrectamente</p>";
+        //print "<p>Persona registrada incorrectamente</p>";
     }
     mysqli_close($conexion);
 }
@@ -121,7 +146,28 @@ function eliminarUsuario($nombreUsuario){
 }
 
 
+function crearBackup(){
+    global $host, $usuario, $pass, $bd;
+    $fechaHora=date('d-M-Y_H-i-s');
+    $ficheroBackup= 'C:\xampp\htdocs\PHP\PHPEquip1\pagina\CopiasSeguridad' . $bd . '_' . $fechaHora . '.sql';
+    $logFile = 'C:\xampp\htdocs\PHP\PHPEquip1\pagina\CopiasSeguridad' . $bd . '_backup_error.log';
+    $comando = "mysqldump --host='$host' --user='$usuario' --password='$pass' '$bd' > '$ficheroBackup'";
+    exec($comando, $salida, $resultado);
+    if ($resultado === 0) {
+        print "ta bien";
+        //echo "<script>alert('Copia de seguridad hecha correctamente');
+        //window.onclose = window.location.href = '../principal.html';</script>";
+    } else {
+        print "no ta bien";
+        $errorLog = file_get_contents($logFile);
+        echo $errorLog;
+        //echo "<script>alert('La copia de seguridad ha fallado');
+        //window.onclose = window.location.href = '../principal.html';</script>";
+        
+    }
 
+    
+}
 
 
 

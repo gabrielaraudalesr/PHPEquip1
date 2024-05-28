@@ -13,6 +13,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
         case 'registro':
 
             //almacena los datos del formulario en variables
+            $user=$_POST['usuario'];
             $correo=$_POST['correo'];
             $nombre=$_POST['nombre'];
             $apellido=$_POST['apellido'];
@@ -21,7 +22,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             $fechaNacimiento=$_POST['fecha'];
             $imagenPerfil=$_POST['imagen'];
             //llama a la funcion que añade un usuario a la base de datos
-            agregarUsuario($nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento, $correo, $imagenPerfil);
+            agregarUsuario($user, $nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento, $correo, $imagenPerfil);
 
             //Crea un botón que lleva a la pagina de login una vez se confirma el registro del usuario
             echo "<button onclick='volverAlLogin()'>Ir a la página de inicio de sesión</button>
@@ -35,9 +36,9 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
 
         case 'login':
 
-            $correo=$_POST['correo'];
+            $user=$_POST['user'];
             $contrasena=$_POST['contrasena'];
-            comprobarLogin($correo, $contrasena);
+            comprobarLogin($user, $contrasena);
             
             break;
         
@@ -158,6 +159,15 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             
             
             
+
+
+            break;
+
+
+        case 'copia':
+            crearBackup();
+            
+
 
 
             break;

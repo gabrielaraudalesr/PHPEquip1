@@ -5,6 +5,7 @@ $usuario = "root";
 $pass="";
 $bd = "streameclipse";
 $port = 3306;
+
 //Metodo que establece la conexion con la base de datos, usada cada vez que se ejecute una funcion que requiera una conexion con la misma y cerrandose al finalizar la ejecucion de la funcion
 function conectarBD() {
     global $host, $usuario, $pass, $bd, $port;
