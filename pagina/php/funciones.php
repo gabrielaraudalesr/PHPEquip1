@@ -63,7 +63,7 @@ function listarUsuarios(){
     $resultado=mysqli_query($conexion,$consulta);
     
     
-        $lista="<table border=1 style='border-collapse: collapse;'><thead><tr><th>ID Usuario</th><th>NombreUsuario</th><th>Nombre</th><th>Apellido</th><th>Contraseña</th><th>Poblacion</th><th>Fecha Nacimiento</th><th>Correo</th></tr></thead><tbody>";
+        $lista="<table border=1 style='border-collapse: collapse;'><thead><tr><th>ID Usuario</th><th>NombreUsuario</th><th>Nombre</th><th>Apellido</th><th>Contraseña</th><th>Poblacion</th><th>Fecha Nacimiento</th><th>Correo</th><th>Imagen de Perfil</th></tr></thead><tbody>";
         while($fila=mysqli_fetch_array($resultado)){            
 
             $id=$fila["IDUsuario"];
