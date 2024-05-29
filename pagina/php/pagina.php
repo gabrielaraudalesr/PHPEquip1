@@ -135,7 +135,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
 
         case 'modificarUsuario':
             $nombreModificar=$_POST['nombreModificar'];
-
+            print modificarUsuario($nombreModificar);
 
 
 

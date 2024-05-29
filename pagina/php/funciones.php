@@ -94,7 +94,7 @@ function listarUsuarios(){
 function agregarUsuario($nombreUsuario, $nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento, $correo, $imagenPerfil){
     $conexion=conectarBD();
     $contrasena=encriptar($contrasena);
-    $consulta= "INSERT INTO usuarios (Usuario, Nombre, Apellido, Contrasena, Poblacion, FechaNacimiento, Correo, ImagenPerfil) VALUES ('$nombreUsuario', '$nombre', '$apellido', '$contrasena', '$poblacion', '$fechaNacimiento', '$correo', '$imagenPerfil');";
+    $consulta= "INSERT INTO usuarios (nombreUsuario, Nombre, Apellido, Contrasena, Poblacion, FechaNacimiento, Correo, ImagenPerfil) VALUES ('$nombreUsuario', '$nombre', '$apellido', '$contrasena', '$poblacion', '$fechaNacimiento', '$correo', '$imagenPerfil');";
     if (mysqli_query($conexion, $consulta) === TRUE) {
         //print "<p>Persona registrada correctamente</p>";
     } else {
@@ -148,12 +148,29 @@ function eliminarUsuario($nombreUsuario){
     mysqli_close($conexion);
 }
 
+function modificarUsuario($nombreUsuario){
+    $conexion=conectarBD();    
+    $consulta="SELECT * FROM usuarios WHERE Nombre='$nombreUsuario';";
+    $resultado=mysqli_query($conexion, $consulta);
+    while($fila=mysqli_fetch_array($resultado)){
+            $user=$fila["nombreUsuario"];
+            $nombre=$fila["Nombre"];
+            $apellido=$fila["Apellido"];
+            $contrasena=$fila["Contrasena"];
+            $poblacion=$fila["Poblacion"];
+            $fechaNacimiento=$fila["FechaNacimiento"];
+            $correo=$fila["Correo"];
+            $imagenPerfil=$fila["ImagenPerfil"];
+    }
+    print "$user, $nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento, $correo";
+}
+
 
 function crearBackup(){
     global $host, $usuario, $pass, $bd;
     $fechaHora=date('d-M-Y_H-i-s');
-    $ficheroBackup= 'C:\xampp\htdocs\PHP\PHPEquip1\pagina\CopiasSeguridad' . $bd . '_' . $fechaHora . '.sql';
-    $logFile = 'C:\xampp\htdocs\PHP\PHPEquip1\pagina\CopiasSeguridad' . $bd . '_backup_error.log';
+    $ficheroBackup= '../CopiasSeguridad' . $bd . '_' . $fechaHora . '.sql';
+    $logFile = '../CopiasSeguridad' . $bd . '_backup_error.log';
     $comando = "mysqldump --host='$host' --user='$usuario' --password='$pass' '$bd' > '$ficheroBackup'";
     exec($comando, $salida, $resultado);
     if ($resultado === 0) {
@@ -162,8 +179,7 @@ function crearBackup(){
         //window.onclose = window.location.href = '../principal.html';</script>";
     } else {
         print "no ta bien";
-        $errorLog = file_get_contents($logFile);
-        echo $errorLog;
+        
         //echo "<script>alert('La copia de seguridad ha fallado');
         //window.onclose = window.location.href = '../principal.html';</script>";
         
