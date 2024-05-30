@@ -59,11 +59,11 @@ function listarUsuarios(){
     
     $conexion=conectarBD();
     
-    $consulta="SELECT `IDUsuario`,`nombreUsuario`,`Nombre`,`Apellido`,`Contrasena`,`Poblacion`,DATE_FORMAT(`FechaNacimiento`, '%d-%m-%Y') 'FechaNacimiento',`Correo`,`ImagenPerfil` FROM usuarios";
+    $consulta="SELECT `IDUsuario`,`nombreUsuario`,`Nombre`,`Apellido`,`Contrasena`,`Poblacion`,`Telefono`,DATE_FORMAT(`FechaNacimiento`, '%d-%m-%Y') 'FechaNacimiento',`Correo`,`ImagenPerfil` FROM usuarios";
     $resultado=mysqli_query($conexion,$consulta);
     
     
-        $lista="<table border=1 style='border-collapse: collapse;'><thead><tr><th>ID Usuario</th><th>NombreUsuario</th><th>Nombre</th><th>Apellido</th><th>Contraseña</th><th>Poblacion</th><th>Fecha Nacimiento</th><th>Correo</th><th>Imagen de Perfil</th></tr></thead><tbody>";
+        $lista="<table border=1 style='border-collapse: collapse;'><thead><tr><th>ID Usuario</th><th>NombreUsuario</th><th>Nombre</th><th>Apellido</th><th>Contraseña</th><th>Poblacion</th><th>Telefono</th><th>Fecha Nacimiento</th><th>Correo</th><th>Imagen de Perfil</th></tr></thead><tbody>";
         while($fila=mysqli_fetch_array($resultado)){            
 
             $id=$fila["IDUsuario"];
@@ -72,12 +72,13 @@ function listarUsuarios(){
             $apellido=$fila["Apellido"];
             $contrasena=$fila["Contrasena"];
             $poblacion=$fila["Poblacion"];
+            $telefono=$fila["Telefono"];
             $fechaNacimiento=$fila["FechaNacimiento"];
             $correo=$fila["Correo"];
             $imagenPerfil=$fila["ImagenPerfil"];
             $imagenPerfil='<img src="data:image/jpeg;base64,'.base64_encode($imagenPerfil) .'" style="width: 15%;height:15%;"/>';
             
-        $lista .= "<tr><td>" . $id . "</td><td>" . $user . "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contrasena . "</td><td>" . $poblacion . "</td><td>" . $fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr>"; 
+        $lista .= "<tr><td>" . $id . "</td><td>" . $user . "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contrasena . "</td><td>" . $poblacion . "</td><td>" . $telefono . "</td><td>" .$fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr>"; 
             
         }
         $lista.="</tbody></table>";
@@ -91,10 +92,10 @@ function listarUsuarios(){
     mysqli_close($conexion);
 }
 //Funcion que añade usuarios a la base de datos
-function agregarUsuario($nombreUsuario, $nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento, $correo, $imagenPerfil){
+function agregarUsuario($nombreUsuario, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil){
     $conexion=conectarBD();
     $contrasena=encriptar($contrasena);
-    $consulta= "INSERT INTO usuarios (nombreUsuario, Nombre, Apellido, Contrasena, Poblacion, FechaNacimiento, Correo, ImagenPerfil) VALUES ('$nombreUsuario', '$nombre', '$apellido', '$contrasena', '$poblacion', '$fechaNacimiento', '$correo', '$imagenPerfil');";
+    $consulta= "INSERT INTO usuarios (nombreUsuario, Nombre, Apellido, Contrasena, Poblacion, Telefono, FechaNacimiento, Correo, ImagenPerfil) VALUES ('$nombreUsuario', '$nombre', '$apellido', '$contrasena', '$poblacion', '$telefono', '$fechaNacimiento', '$correo', '$imagenPerfil');";
     if (mysqli_query($conexion, $consulta) === TRUE) {
         //print "<p>Persona registrada correctamente</p>";
     } else {
@@ -153,23 +154,19 @@ function modificarUsuario($nombreUsuario){
     $consulta="SELECT * FROM usuarios WHERE Nombre='$nombreUsuario';";
     $resultado=mysqli_query($conexion, $consulta);
     while($fila=mysqli_fetch_array($resultado)){
-            $user=$fila["nombreUsuario"];
-            $nombre=$fila["Nombre"];
-            $apellido=$fila["Apellido"];
-            $contrasena=$fila["Contrasena"];
-            $poblacion=$fila["Poblacion"];
-            $poblacion=$fila[""];
-            $fechaNacimiento=$fila["FechaNacimiento"];
-            $correo=$fila["Correo"];
-            $imagenPerfil=$fila["ImagenPerfil"];
+        $user=$fila["nombreUsuario"];
+        $nombre=$fila["Nombre"];
+        $apellido=$fila["Apellido"];
+        $poblacion=$fila["Poblacion"];
+        $fechaNacimiento=$fila["FechaNacimiento"];
+        $correo=$fila["Correo"];
+        $imagenPerfil=$fila["ImagenPerfil"];
     }
     session_start();
     $_SESSION['user'] = $user;
     $_SESSION['nombre'] = $nombre;
     $_SESSION['apellido'] = $apellido;
-    $_SESSION['contrasena'] = $contrasena;
     $_SESSION['poblacion'] = $poblacion;
-    $_SESSION['telefono'] = $telefono;
     $_SESSION['fechaNacimiento'] = $fechaNacimiento;
     $_SESSION['correo'] = $correo;
     $_SESSION['imagenPerfil'] = $imagenPerfil;

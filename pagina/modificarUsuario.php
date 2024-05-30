@@ -14,30 +14,26 @@ session_start();
 $user=isset($_SESSION['user']) ? $_SESSION['user'] : '';
 $nombre=isset($_SESSION['nombre']) ? $_SESSION['nombre'] : '';
 $apellido=isset($_SESSION['apellido']) ? $_SESSION['apellido'] : '';
-$contrasena=isset($_SESSION['contrasena']) ? $_SESSION['contrasena'] : '';
 $poblacion=isset($_SESSION['poblacion']) ? $_SESSION['poblacion'] : '';
 $telefono=isset($_SESSION['telefono']) ? $_SESSION['telefono'] : '';
 $fechaNacimiento=isset($_SESSION['fechaNacimiento']) ? $_SESSION['fechaNacimiento'] : '';
 $correo=isset($_SESSION['correo']) ? $_SESSION['correo'] : '';
-$imagenPerfil=isset($_SESSION['imagenPerfil']) ? $_SESSION['imagenPerfil'] : '';
 unset($_SESSION['user']);
 unset($_SESSION['nombre']);
 unset($_SESSION['apellido']);
-unset($_SESSION['contrasena']);
 unset($_SESSION['poblacion']);
 unset($_SESSION['telefono']);
 unset($_SESSION['fechaNacimiento']);
 unset($_SESSION['correo']);
-unset($_SESSION['imagenPerfil']);
 ?>
 <body>
     <div id="page">
         <div id="formularioContenedor">
             <header>
-                <h1>Registro</h1>
+                <h1>Modificar</h1>
             </header>
             <form action="./php/pagina.php" method="post" id="formulario">
-                <input type="hidden" name="formulario" value="registro">
+                <input type="hidden" name="formulario" value="modificar">
                 <article class="datosPersonales">
                     <label for="usuario">Usuario: </label>
                     <label for="correo">Correo: </label>
@@ -55,8 +51,8 @@ unset($_SESSION['imagenPerfil']);
                     <input type="text" id="apellido" name="apellido" value="<?php echo htmlspecialchars($apellido); ?>" required placeholder="Apellidos:">
                 </article>
                 <label for="contraseña">Contraseña: </label>
+                <input type="password" id="pass" name="contrasena" required placeholder="Contraseña:">
                 <label for="contraseña2">Confirma Contraseña: </label>
-                <input type="password" id="pass" name="contrasena" value="<?php echo htmlspecialchars($contrasena); ?>" required placeholder="Contraseña:">
                 <input type="password" id="pass2" required placeholder="Contraseña:">
                 <label for="poblacion">Poblacion: </label>
                 <input type="text" id="poblacion" name="poblacion" value="<?php echo htmlspecialchars($poblacion); ?>" required placeholder="Poblacion:">
@@ -65,7 +61,7 @@ unset($_SESSION['imagenPerfil']);
                 <label for="fecha">Fecha de nacimiento: </label>
                 <input type="date" id="fecha" name="fecha" value="<?php echo htmlspecialchars($fechaNacimiento); ?>" required>
                 <label for="perfil">Imagen de perfil: </label>
-                <input type="file" name="imagen" id="imagen" value="<?php echo htmlspecialchars($imagenPerfil); ?>" accept="image/png, image/jpeg, image/jpg">
+                <input type="file" name="imagen" id="imagen" accept="image/png, image/jpeg, image/jpg">
                 <article class="botones">
                     <button type="submit" id="enviar" class="btn">Enviar</button>
                     <button type="reset" id="borrar" class="btn">Borrar</button>

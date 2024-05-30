@@ -19,10 +19,11 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             $apellido=$_POST['apellido'];
             $contrasena=$_POST['contrasena'];
             $poblacion=$_POST['poblacion'];
+            $telefono=$_POST['telefono'];
             $fechaNacimiento=$_POST['fecha'];
             $imagenPerfil=$_POST['imagen'];
             //llama a la funcion que añade un usuario a la base de datos
-            agregarUsuario($user, $nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento, $correo, $imagenPerfil);
+            agregarUsuario($user, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil);
 
             //Crea un botón que lleva a la pagina de login una vez se confirma el registro del usuario
             echo "<button onclick='volverAlLogin()'>Ir a la página de inicio de sesión</button>
@@ -135,7 +136,29 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
 
         case 'modificarUsuario':
             $nombreModificar=$_POST['nombreModificar'];
-            print modificarUsuario($nombreModificar);
+            modificarUsuario($nombreModificar);
+            header("Location: ../modificarUsuario.php");
+
+
+
+            break;
+
+        case 'modificar':
+            $user=$_POST['usuario'];
+            $correo=$_POST['correo'];
+            $nombre=$_POST['nombre'];
+            $apellido=$_POST['apellido'];
+            $contrasena=$_POST['contrasena'];
+            $poblacion=$_POST['poblacion'];
+            $telefono=$_POST['telefono'];
+            $fechaNacimiento=$_POST['fecha'];
+            $imagenPerfil=$_POST['imagen'];
+            $nombreModificar=$_POST['nombreModificar'];
+            $conexion=conectarBD();
+            $consulta="UPDATE `usuarios` SET `nombreUsuario`='$user',`Nombre`='$nombre',`Apellido`='$apellido',`Contrasena`='$contrasena',`Poblacion`='$poblacion',`Telefono`='$telefono',`FechaNacimiento`='$fechaNacimiento',`Correo`='$correo' WHERE `Correo`='$correo'";
+            $resultado=mysqli_query($conexion, $consulta);
+            
+            
 
 
 
