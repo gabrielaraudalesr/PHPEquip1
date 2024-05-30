@@ -25,7 +25,7 @@ unset($_SESSION['error']);
             <form action="./php/pagina.php" method="post" id="formulario">
                 <input type="hidden" name="formulario" value="login">
                 <label for="usuario" >Usuario/Correo: </label>
-                <input type="text" id="user" name="user"  value="<?php echo htmlspecialchars($user); ?>" placeholder="Usuario">
+                <input type="text" id="user" name="user" value="<?php echo htmlspecialchars($user); ?>" placeholder="Usuario">
                 <label for="contraseña">Contraseña: </label>
                 <input type="password" id="pass" name="contrasena" required placeholder="Contraseña">
                 <label for="error" style="color: red;"><?php echo htmlspecialchars($error); ?></label>

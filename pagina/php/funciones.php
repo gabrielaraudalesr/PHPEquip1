@@ -158,11 +158,22 @@ function modificarUsuario($nombreUsuario){
             $apellido=$fila["Apellido"];
             $contrasena=$fila["Contrasena"];
             $poblacion=$fila["Poblacion"];
+            $poblacion=$fila[""];
             $fechaNacimiento=$fila["FechaNacimiento"];
             $correo=$fila["Correo"];
             $imagenPerfil=$fila["ImagenPerfil"];
     }
-    print "$user, $nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento, $correo";
+    session_start();
+    $_SESSION['user'] = $user;
+    $_SESSION['nombre'] = $nombre;
+    $_SESSION['apellido'] = $apellido;
+    $_SESSION['contrasena'] = $contrasena;
+    $_SESSION['poblacion'] = $poblacion;
+    $_SESSION['telefono'] = $telefono;
+    $_SESSION['fechaNacimiento'] = $fechaNacimiento;
+    $_SESSION['correo'] = $correo;
+    $_SESSION['imagenPerfil'] = $imagenPerfil;
+    //print "$user, $nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento, $correo";
 }
 
 
