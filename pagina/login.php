@@ -31,7 +31,7 @@ unset($_SESSION['error']);
                 <label for="error" style="color: red;"><?php echo htmlspecialchars($error); ?></label>
                 <article class="botones">
                     <button type="submit" id="enviarLogin" class="btn">Enviar</button>
-                    <button onclick="window.location.href='registro.html'" id="volver" class="btn">Volver</button>
+                    <button type="button" id="volver" class="btn" onclick="window.location.replace('./index.html')" >Volver</button>
                 </article>
             </form>
 
