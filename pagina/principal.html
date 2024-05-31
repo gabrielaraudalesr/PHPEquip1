@@ -27,13 +27,6 @@
                         <input type="hidden" name="formulario" value="lista">   
                         <button>Mostrar lista de usuarios</button> 
                     </form>
-                    
-                    <div id="busquedaUsuarios" onload="ocultar()">
-                        <h2>Buscar Usuario</h2>                                             
-                        <input type="text" id="buscarNombre" placeholder="Nombre de usuario">
-                        <button onclick="buscarUsuario()">Buscar</button>
-                    </div>
-                    <div id="listaUsuarios"></div>
                 </div>
 
 
@@ -103,24 +96,16 @@
             <iframe id="registro" src="./registro.html" onsubmit=""></iframe>
 
         
-
+        </div>
         <div class="gridItem" id="logAcciones">
             <h2>Registro de Acciones</h2>
             <form action="./php/pagina.php" method="post">
                 <input type="hidden" name="formulario" value="log">
                 <button class="btn">Mostrar log de acciones</button>
             </form>
-            
-            <div id="logContent">
-                <!-- Aquí se mostrará el log -->
-            </div>
         </div>
 
-        <div class="gridItem" id="backupRestore">
-            <h2>Copia o Restauración de Seguridad</h2>
-            <button onclick="crearBackup()" class="btn">Crear copia de seguridad</button>
-            <button onclick="restaurarBackup()" class="btn" >Restaurar datos</button>
-        </div>
+        
     </div>
 </body>
 

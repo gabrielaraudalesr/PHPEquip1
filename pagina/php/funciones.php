@@ -4,54 +4,33 @@ include './datos.php';
 //Funcion que comprueba que el usuario y contraseña están correctamente
 function comprobarLogin($user, $contrasena){
     $conexion=conectarBD();
-    if (strpos($user, '@') === TRUE) {
-        $consulta="SELECT Correo, Contrasena FROM usuarios";
-        $resultado=mysqli_query($conexion,$consulta);
+    session_start();
+    if (filter_var($user, FILTER_VALIDATE_EMAIL)) {        
+        $consulta = "SELECT Correo, Contrasena FROM usuarios WHERE Correo = ?";
+    } else {
+        $consulta = "SELECT nombreUsuario, Contrasena FROM usuarios WHERE nombreUsuario = ?";
+    }
 
-        while ($fila=mysqli_fetch_array($resultado)) {
-            if ($user == $fila['Correo']) {
-                if (password_verify($contrasena, $fila['Contrasena'])) {
-                header("Location: ../principal.html");
-                } else {
-                    session_start();
-                    $_SESSION['user_temp'] = isset($_POST['user']) ? $_POST['user'] : '';
-                    $_SESSION['error']="Usuario o contraseña incorrectos";
-                    header("Location: ../login.php");                    
-                }
-            } else {
-                session_start();
-                $_SESSION['user_temp'] = isset($_POST['user']) ? $_POST['user'] : '';
-                $_SESSION['error']="Usuario o contraseña incorrectos";
-                header("Location: ../login.php");                
-            }
+    $stmt=mysqli_prepare($conexion, $consulta);
+    mysqli_stmt_bind_param($stmt, 's', $user);
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_bind_result($stmt, $dbUser, $dbPassword);
+    mysqli_stmt_store_result($stmt);
+
+    if (mysqli_stmt_num_rows($stmt)>0) {
+        mysqli_stmt_fetch($stmt);
+        if (password_verify($contrasena, $dbPassword)) {
+            header("Location: ../principal.html");
+            exit();
         }
     } else {
-        $consulta="SELECT nombreUsuario, Contrasena FROM usuarios";
-        $resultado=mysqli_query($conexion,$consulta);
-
-        while ($fila=mysqli_fetch_array($resultado)) {
-            if ($user == $fila['nombreUsuario']) {
-                if (password_verify($contrasena, $fila['Contrasena'])) {
-                header("Location: ../principal.html");
-
-                } else {
-                    session_start();
-                    $_SESSION['user_temp'] = isset($_POST['user']) ? $_POST['user'] : '';
-                    $_SESSION['error']="Usuario o contraseña incorrectos";
-                    header("Location: ../login.php");
-                    
-                }
-            } else {
-                session_start();
-                $_SESSION['user_temp'] = isset($_POST['user']) ? $_POST['user'] : '';
-                $_SESSION['error']="Usuario o contraseña incorrectos";
-                header("Location: ../login.php");
-                
-            }
-        }
+        $_SESSION['user_temp'] = isset($_POST['user']) ? $_POST['user'] : '';
+        $_SESSION['error']="Usuario o contraseña incorrectos";
+        header("Location: ../login.php");
+        exit();
     }
-    
-    
+    mysqli_stmt_close($stmt);
     mysqli_close($conexion);
 }
 //Funcion usada para hacer una lista de los usuarios de la base de datos
@@ -76,6 +55,7 @@ function listarUsuarios(){
             $fechaNacimiento=$fila["FechaNacimiento"];
             $correo=$fila["Correo"];
             $imagenData=$fila["ImagenPerfil"];
+            
             $imagenPerfil='<img src="data:image/png;base64,'. base64_encode($imagenData) .'", "data:image/jpeg;base64,'. base64_encode($imagenData) .'", "data:image/jpg;base64,'. base64_encode($imagenData) .'" style="width: 15%; height:15%;"/>';
             
         $lista .= "<tr><td>" . $id . "</td><td>" . $user . "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contrasena . "</td><td>" . $poblacion . "</td><td>" . $telefono . "</td><td>" .$fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr>"; 
@@ -95,12 +75,17 @@ function listarUsuarios(){
 function agregarUsuario($nombreUsuario, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil){
     $conexion=conectarBD();
     $contrasena=encriptar($contrasena);
-    $consulta= "INSERT INTO usuarios (nombreUsuario, Nombre, Apellido, Contrasena, Poblacion, Telefono, FechaNacimiento, Correo, ImagenPerfil) VALUES ('$nombreUsuario', '$nombre', '$apellido', '$contrasena', '$poblacion', '$telefono', '$fechaNacimiento', '$correo', '$imagenPerfil');";
-    if (mysqli_query($conexion, $consulta) === TRUE) {
+    
+    $consulta="INSERT INTO usuarios (nombreUsuario, Nombre, Apellido, Contrasena, Poblacion, Telefono, FechaNacimiento, Correo, ImagenPerfil) VALUES (?, ?, ?, ? ,? ,? ,? ,? ,?);";
+    $stmt=mysqli_prepare($conexion, $consulta);
+    mysqli_stmt_bind_param($stmt, "sssssssss", $nombreUsuario, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil);
+    
+    if (mysqli_stmt_execute($stmt) === TRUE) {
         //print "<p>Persona registrada correctamente</p>";
     } else {
         //print "<p>Persona registrada incorrectamente</p>";
     }
+    mysqli_stmt_close($stmt);
     mysqli_close($conexion);
 }
 //Funcion que encripta la contraseña
@@ -174,30 +159,6 @@ function modificarUsuario($nombreUsuario){
     $_SESSION['imagenPerfil'] = $imagenPerfil;
 }
 
-
-function crearBackup(){
-    global $host, $usuario, $pass, $bd;
-    $fechaHora=date('d-M-Y_H-i-s');
-    $ficheroBackup= '../../CopiasSeguridad/' . '_' . $bd . '_' . $fechaHora . '.sql';
-    $logFile = '../../CopiasSeguridad' . $bd . '_backup_error.log';
-    $comando = "mysqldump --host=$host --user=$usuario --password=$pass $bd > $ficheroBackup";
-    exec($comando, $salida, $resultado);
-    echo $logFile;
-    if ($salida === 0) {
-        print "ta bien";
-        //echo "<script>alert('Copia de seguridad hecha correctamente');
-        //window.onclose = window.location.href = '../principal.html';</script>";
-    } else {
-        print "no ta bien";
-        
-        //echo "<script>alert('La copia de seguridad ha fallado');
-        //window.onclose = window.location.href = '../principal.html';</script>";
-        
-    }
-    
-    
-}
-
 function modificarUsuario2($user, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil){
     $conexion=conectarBD();
     $imagenPerfil=file_get_contents($imagenPerfil);
@@ -214,6 +175,40 @@ function modificarUsuario2($user, $nombre, $apellido, $contrasena, $poblacion, $
     mysqli_stmt_close($stmt);
     mysqli_close($conexion);
 }
+
+function crearBackup(){
+    global $host, $usuario, $pass, $bd;
+    $ficheroBackup= '../CopiasSeguridad/' . $bd . '.sql';
+    $comando = "mysqldump --host=$host --user=$usuario --password=$pass $bd > $ficheroBackup";    
+    
+    if (!system($comando)) {
+        echo "<script>alert('Copia de seguridad hecha correctamente');
+        window.onclose = window.location.href = '../principal.html';</script>";
+    } else {
+        echo "<script>alert('La copia de seguridad ha fallado');
+        window.onclose = window.location.href = '../principal.html';</script>";
+        
+    }
+}
+
+function restaurarBD(){
+    global $host, $usuario, $pass, $bd;
+
+    $archivoBackup='../CopiasSeguridad/' . $bd . '.sql';
+
+    $comando = "mysql --host=$host --user=$usuario --password=$pass $bd < $archivoBackup"; 
+
+    if (!system($comando)) {
+        echo "<script>alert('Restauración completada');
+        window.onclose = window.location.href = '../principal.html';</script>";
+    } else {
+        echo "<script>alert('La restauracion ha fallado');
+        window.onclose = window.location.href = '../principal.html';</script>";
+    }
+
+}
+
+
 
 
 

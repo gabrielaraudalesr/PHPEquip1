@@ -21,8 +21,8 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             $poblacion=$_POST['poblacion'];
             $telefono=$_POST['telefono'];
             $fechaNacimiento=$_POST['fecha'];
-            $imagenPerfil=$_POST['imagen'];
-            $imagenPerfil=file_get_contents($imagenPerfil);
+            $imagen=$_FILES['imagen']['tmp_name'];
+            $imagenPerfil=file_get_contents($imagen);
             //llama a la funcion que añade un usuario a la base de datos
             agregarUsuario($user, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil);
 
@@ -133,9 +133,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             $nombreModificar=$_POST['nombreModificar'];
             modificarUsuario($nombreModificar);
             header("Location: ../modificarUsuario.php");
-
-
-
             break;
 
         case 'modificar':
@@ -157,11 +154,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
                 echo "<script>alert('Error en la modificación');";
                 //window.onclose = window.location.href = '../principal.html';</script>";
             }
-            
-            
-
-
-
             break;
 
         case 'eliminarUsuario':
@@ -175,24 +167,13 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
                 echo "<script>alert('ERROR, el usuario no existe');
                 window.onclose = window.location.href = '../principal.html';</script>";
             }
-                
-            
-                
-                
-            
-            
-            
-
-
             break;
-
-
         case 'copia':
             crearBackup();
-            
+            break;
 
-
-
+        case 'restaurar':
+            restaurarBD();
             break;
         default:
             
