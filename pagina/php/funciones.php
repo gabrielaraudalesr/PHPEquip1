@@ -172,18 +172,18 @@ function modificarUsuario($nombreUsuario){
     $_SESSION['fechaNacimiento'] = $fechaNacimiento;
     $_SESSION['correo'] = $correo;
     $_SESSION['imagenPerfil'] = $imagenPerfil;
-    //print "$user, $nombre, $apellido, $contrasena, $poblacion, $fechaNacimiento, $correo";
 }
 
 
 function crearBackup(){
     global $host, $usuario, $pass, $bd;
     $fechaHora=date('d-M-Y_H-i-s');
-    $ficheroBackup= '../CopiasSeguridad' . $bd . '_' . $fechaHora . '.sql';
-    $logFile = '../CopiasSeguridad' . $bd . '_backup_error.log';
-    $comando = "mysqldump --host='$host' --user='$usuario' --password='$pass' '$bd' > '$ficheroBackup'";
+    $ficheroBackup= '../../CopiasSeguridad/' . '_' . $bd . '_' . $fechaHora . '.sql';
+    $logFile = '../../CopiasSeguridad' . $bd . '_backup_error.log';
+    $comando = "mysqldump --host=$host --user=$usuario --password=$pass $bd > $ficheroBackup";
     exec($comando, $salida, $resultado);
-    if ($resultado === 0) {
+    echo $logFile;
+    if ($salida === 0) {
         print "ta bien";
         //echo "<script>alert('Copia de seguridad hecha correctamente');
         //window.onclose = window.location.href = '../principal.html';</script>";
@@ -194,7 +194,7 @@ function crearBackup(){
         //window.onclose = window.location.href = '../principal.html';</script>";
         
     }
-
+    
     
 }
 
