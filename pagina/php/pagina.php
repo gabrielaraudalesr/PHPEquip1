@@ -153,10 +153,14 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             $telefono=$_POST['telefono'];
             $fechaNacimiento=$_POST['fecha'];
             $imagenPerfil=$_POST['imagen'];
-            $nombreModificar=$_POST['nombreModificar'];
-            $conexion=conectarBD();
-            $consulta="UPDATE `usuarios` SET `nombreUsuario`='$user',`Nombre`='$nombre',`Apellido`='$apellido',`Contrasena`='$contrasena',`Poblacion`='$poblacion',`Telefono`='$telefono',`FechaNacimiento`='$fechaNacimiento',`Correo`='$correo' WHERE `Correo`='$correo'";
-            $resultado=mysqli_query($conexion, $consulta);
+            $resultado=modificarUsuario2($user, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil);
+            if ($resultado===TRUE) {
+                echo "<script>alert('Usuario modificado correctamente');
+                window.onclose = window.location.href = '../principal.html';</script>";
+            } else  {
+                echo "<script>alert('Error en la modificación');";
+                //window.onclose = window.location.href = '../principal.html';</script>";
+            }
             
             
 

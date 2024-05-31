@@ -27,7 +27,7 @@ function mostrarForm(id) {
 // Configurar el botón de cerrar al cargar la página
 document.addEventListener('DOMContentLoaded', function () {
     var botonCerrar = document.getElementById("cerrar");
-    botonCerrar.onclick = function () {
+    botonCerrar.onclick = function() {
         var form = document.getElementById("formCrear");
         form.style.display = "none";
     };

@@ -196,6 +196,22 @@ function crearBackup(){
     
 }
 
+function modificarUsuario2($user, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil){
+    $conexion=conectarBD();
+    $contrasena=encriptar($contrasena);
+    $consulta="UPDATE `usuarios` SET `nombreUsuario`='$user',`Nombre`='$nombre',`Apellido`='$apellido',`Contrasena`='$contrasena',`Poblacion`='$poblacion',`Telefono`='$telefono',`FechaNacimiento`='$fechaNacimiento',`ImagenPerfil`='$imagenPerfil' WHERE `Correo`='$correo';";
+    $stmt=mysqli_prepare($conexion, $consulta);
+    
+    mysqli_stmt_execute($stmt);
+    if (mysqli_stmt_affected_rows($stmt)>0) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+    mysqli_stmt_close($stmt);
+    mysqli_close($conexion);
+}
+
 
 
 

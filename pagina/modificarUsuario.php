@@ -40,7 +40,7 @@ unset($_SESSION['correo']);
                 </article>
                 <article class="datosPersonales">
                     <input type="text" id="user" name="usuario" value="<?php echo htmlspecialchars($user); ?>" required placeholder="Usuario:">
-                    <input type="text" id="correo" name="correo" value="<?php echo htmlspecialchars($correo); ?>" required placeholder="Correo:">
+                    <input type="text" id="correo" name="correo" value="<?php echo htmlspecialchars($correo); ?>" required readonly>
             </article>
                 <article class="datosPersonales">
                     <label for="nombre">Nombre: </label>
