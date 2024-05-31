@@ -13,9 +13,9 @@ function conectarBD() {
 
     // Verificar conexión
     if (!$conexion) {
-        echo "<p>Conexion fallida</p> <br>";
+        //echo "<p>Conexion fallida</p> <br>";
     } else {
-        echo "<p>Conexion correcta</p> <br>";
+        //echo "<p>Conexion correcta</p> <br>";
     }
 
     return $conexion;

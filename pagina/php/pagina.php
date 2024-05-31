@@ -22,17 +22,12 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             $telefono=$_POST['telefono'];
             $fechaNacimiento=$_POST['fecha'];
             $imagenPerfil=$_POST['imagen'];
+            $imagenPerfil=file_get_contents($imagenPerfil);
             //llama a la funcion que añade un usuario a la base de datos
             agregarUsuario($user, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil);
 
             //Crea un botón que lleva a la pagina de login una vez se confirma el registro del usuario
-            echo "<button onclick='volverAlLogin()'>Ir a la página de inicio de sesión</button>
-            <script>
-                function volverAlLogin() {
-                    //Redireccionar a la página de inicio de sesión
-                    window.location.href = '../login.html';
-                }
-            </script>";
+            header("Location: ../index.html");
             break;
 
         case 'login':
@@ -153,6 +148,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             $telefono=$_POST['telefono'];
             $fechaNacimiento=$_POST['fecha'];
             $imagenPerfil=$_POST['imagen'];
+            
             $resultado=modificarUsuario2($user, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil);
             if ($resultado===TRUE) {
                 echo "<script>alert('Usuario modificado correctamente');

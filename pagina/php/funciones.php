@@ -75,8 +75,8 @@ function listarUsuarios(){
             $telefono=$fila["Telefono"];
             $fechaNacimiento=$fila["FechaNacimiento"];
             $correo=$fila["Correo"];
-            $imagenPerfil=$fila["ImagenPerfil"];
-            $imagenPerfil='<img src="data:image/jpeg;base64,'.base64_encode($imagenPerfil) .'" style="width: 15%;height:15%;"/>';
+            $imagenData=$fila["ImagenPerfil"];
+            $imagenPerfil='<img src="data:image/png;base64,'. base64_encode($imagenData) .'", "data:image/jpeg;base64,'. base64_encode($imagenData) .'", "data:image/jpg;base64,'. base64_encode($imagenData) .'" style="width: 15%; height:15%;"/>';
             
         $lista .= "<tr><td>" . $id . "</td><td>" . $user . "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contrasena . "</td><td>" . $poblacion . "</td><td>" . $telefono . "</td><td>" .$fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr>"; 
             
@@ -158,6 +158,7 @@ function modificarUsuario($nombreUsuario){
         $nombre=$fila["Nombre"];
         $apellido=$fila["Apellido"];
         $poblacion=$fila["Poblacion"];
+        $telefono=$fila["Telefono"];
         $fechaNacimiento=$fila["FechaNacimiento"];
         $correo=$fila["Correo"];
         $imagenPerfil=$fila["ImagenPerfil"];
@@ -167,6 +168,7 @@ function modificarUsuario($nombreUsuario){
     $_SESSION['nombre'] = $nombre;
     $_SESSION['apellido'] = $apellido;
     $_SESSION['poblacion'] = $poblacion;
+    $_SESSION['telefono'] = $telefono;  
     $_SESSION['fechaNacimiento'] = $fechaNacimiento;
     $_SESSION['correo'] = $correo;
     $_SESSION['imagenPerfil'] = $imagenPerfil;
@@ -198,9 +200,10 @@ function crearBackup(){
 
 function modificarUsuario2($user, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil){
     $conexion=conectarBD();
+    $imagenPerfil=file_get_contents($imagenPerfil);
     $contrasena=encriptar($contrasena);
     $consulta="UPDATE `usuarios` SET `nombreUsuario`='$user',`Nombre`='$nombre',`Apellido`='$apellido',`Contrasena`='$contrasena',`Poblacion`='$poblacion',`Telefono`='$telefono',`FechaNacimiento`='$fechaNacimiento',`ImagenPerfil`='$imagenPerfil' WHERE `Correo`='$correo';";
-    $stmt=mysqli_prepare($conexion, $consulta);
+    $stmt=mysqli_prepare($conexion, $consulta); 
     
     mysqli_stmt_execute($stmt);
     if (mysqli_stmt_affected_rows($stmt)>0) {
