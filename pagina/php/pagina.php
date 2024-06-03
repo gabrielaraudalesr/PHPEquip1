@@ -112,7 +112,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             h1  {
                 font-size: 50px;
                 text-align: center; 
-                color: black;
+                color: #ecf0f1;
                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
                 font-weight: bold;
             }
