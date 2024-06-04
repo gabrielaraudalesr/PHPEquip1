@@ -27,7 +27,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             agregarUsuario($user, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil);
 
             //Crea un botón que lleva a la pagina de login una vez se confirma el registro del usuario
-            header("Location: ../index.html");
+            header("Location: ../principal.html");
             break;
 
         case 'login':

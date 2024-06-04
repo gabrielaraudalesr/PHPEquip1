@@ -22,6 +22,7 @@ function comprobarLogin($user, $contrasena){
         mysqli_stmt_fetch($stmt);
         if (password_verify($contrasena, $dbPassword)) {
             header("Location: ../principal.html");
+            logAccesos($user);
             exit();
         }
     } else {
@@ -33,11 +34,24 @@ function comprobarLogin($user, $contrasena){
     mysqli_stmt_close($stmt);
     mysqli_close($conexion);
 }
+
+function logAccesos($user){
+    $conexion=conectarBD();
+    $consulta="INSERT INTO logs (Accion, `Fecha-Hora`) VALUES (?, ?);";
+    $stmt=mysqli_prepare($conexion, $consulta);
+    $now=date('Y-m-d H:i:s');
+    $accion="El usuario $user ha accedido a la página de administración";
+    mysqli_stmt_bind_param($stmt, "ss", $accion, $now);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    mysqli_close($conexion);
+}
+
+
 //Funcion usada para hacer una lista de los usuarios de la base de datos
 function listarUsuarios(){
     
     $conexion=conectarBD();
-    
     $consulta="SELECT `IDUsuario`,`nombreUsuario`,`Nombre`,`Apellido`,`Contrasena`,`Poblacion`,`Telefono`,DATE_FORMAT(`FechaNacimiento`, '%d-%m-%Y') 'FechaNacimiento',`Correo`,`ImagenPerfil` FROM usuarios";
     $resultado=mysqli_query($conexion,$consulta);
     
@@ -56,7 +70,7 @@ function listarUsuarios(){
             $correo=$fila["Correo"];
             $imagenData=$fila["ImagenPerfil"];
             
-            $imagenPerfil='<img src="data:image/png;base64,'. base64_encode($imagenData) .'", "data:image/jpeg;base64,'. base64_encode($imagenData) .'", "data:image/jpg;base64,'. base64_encode($imagenData) .'" style="width: 15%; height:15%;"/>';
+            $imagenPerfil='<img src="data:image/png;base64,'. base64_encode($imagenData) .'", "data:image/jpeg;base64,'. base64_encode($imagenData) .'", "data:image/jpg;base64,'. base64_encode($imagenData) . '" style="width: 20%; height:20%;"/>';
             
         $lista .= "<tr><td>" . $id . "</td><td>" . $user . "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contrasena . "</td><td>" . $poblacion . "</td><td>" . $telefono . "</td><td>" .$fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr>"; 
             
@@ -81,13 +95,29 @@ function agregarUsuario($nombreUsuario, $nombre, $apellido, $contrasena, $poblac
     mysqli_stmt_bind_param($stmt, "sssssssss", $nombreUsuario, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil);
     
     if (mysqli_stmt_execute($stmt) === TRUE) {
-        //print "<p>Persona registrada correctamente</p>";
+        logCrearUsuario($nombreUsuario, $correo);
+        echo "<script>window.location.replace('./principal.html')</script>";
     } else {
         //print "<p>Persona registrada incorrectamente</p>";
     }
     mysqli_stmt_close($stmt);
     mysqli_close($conexion);
 }
+
+
+function logCrearUsuario($nombreUsuario, $correo){
+    $conexion=conectarBD();
+    $consulta="INSERT INTO logs (Accion, `Fecha-Hora`) VALUES (?, ?);";
+    $stmt=mysqli_prepare($conexion, $consulta);
+    $now=date('Y-m-d H:i:s');
+    $accion="Se ha añadido al usuario con correo: $correo, nombre de usuario: $nombreUsuario";
+    mysqli_stmt_bind_param($stmt, "ss", $accion, $now);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    mysqli_close($conexion);
+}
+
+
 //Funcion que encripta la contraseña
 function encriptar($password){
 
@@ -121,15 +151,28 @@ function mostrarLog(){
 
 function eliminarUsuario($nombreUsuario){
     $conexion=conectarBD();    
-    $consulta="DELETE FROM usuarios WHERE Nombre=?;";
+    $consulta="DELETE FROM usuarios WHERE Correo=?;";
     $stmt=mysqli_prepare($conexion, $consulta);
     mysqli_stmt_bind_param($stmt, "s", $nombreUsuario);
     mysqli_stmt_execute($stmt);
     if (mysqli_stmt_affected_rows($stmt)>0) {
+        logEliminarUsuario($nombreUsuario);
         return TRUE;
     } else {
         return FALSE;
     }
+    mysqli_stmt_close($stmt);
+    mysqli_close($conexion);
+}
+
+function logEliminarUsuario($correo){
+    $conexion=conectarBD();
+    $consulta="INSERT INTO logs (Accion, `Fecha-Hora`) VALUES (?, ?);";
+    $stmt=mysqli_prepare($conexion, $consulta);
+    $now=date('Y-m-d H:i:s');
+    $accion="Se ha eliminado al usuario con correo: $correo";
+    mysqli_stmt_bind_param($stmt, "ss", $accion, $now);
+    mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     mysqli_close($conexion);
 }
@@ -168,10 +211,23 @@ function modificarUsuario2($user, $nombre, $apellido, $contrasena, $poblacion, $
     
     mysqli_stmt_execute($stmt);
     if (mysqli_stmt_affected_rows($stmt)>0) {
+        logModificarUsuario($correo);
         return TRUE;
     } else {
         return FALSE;
     }
+    mysqli_stmt_close($stmt);
+    mysqli_close($conexion);
+}
+
+function logModificarUsuario($correo){
+    $conexion=conectarBD();
+    $consulta="INSERT INTO logs (Accion, `Fecha-Hora`) VALUES (?, ?);";
+    $stmt=mysqli_prepare($conexion, $consulta);
+    $now=date('Y-m-d H:i:s');
+    $accion="Se han modificado los datos del usuario con correo: $correo";
+    mysqli_stmt_bind_param($stmt, "ss", $accion, $now);
+    mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     mysqli_close($conexion);
 }
