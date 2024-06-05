@@ -72,3 +72,9 @@ width: 20%;
 .datosPersonales label{
     width: 50%;
 }
+
+.radio {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}

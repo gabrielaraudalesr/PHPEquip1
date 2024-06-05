@@ -194,35 +194,7 @@ window.addEventListener("DOMContentLoaded",function(e){
 
 
 
-    var botonModificar = document.getElementById("enviarModificar");
-    var passwordM = document.getElementById("passM");
-    var password2M = document.getElementById("pass2M");
-
-    if (botonModificar) {
-            botonModificar.addEventListener("click",function(e){
-            e.preventDefault();
-            
-            if (passwordM.value.length === 0 && password2M.value.length === 0) {
-                form.submit();
-            } else if (passwordM.value.length != 0 && password2M.value.length != 0) {
-                var regex = /^(?=.*[a-z].*[a-z])(?=.*[A-Z].*[A-Z])(?=.*\d.*\d).{8,}$/;
     
-                if (passwordM.value.match(regex)) {
-                    alert("Contraseña correcta");
-                    if(password2M.value === passwordM.value){
-                        alert("Las contraseñas son correctas");
-                        form.submit();
-                        boton.disabled = false;
-                    }else{
-                        alert("Las contraseñas no coinciden");
-                    }
-                    
-                }
-            }
-
-            
-        });
-    }
 
 
     

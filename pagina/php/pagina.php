@@ -140,17 +140,19 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             $correo=$_POST['correo'];
             $nombre=$_POST['nombre'];
             $apellido=$_POST['apellido'];
-            if (isset($_POST['contrasena'])) {
-                $contrasena=$_POST['contrasena'];
-            }
             $contrasena=$_POST['contrasena'];
             $poblacion=$_POST['poblacion'];
             $telefono=$_POST['telefono'];
             $fechaNacimiento=$_POST['fecha'];
-            $imagen=$_POST['imagen']['tmp_name'];
+            $imagen=$_FILES['imagen']['tmp_name'];
             $imagenPerfil=file_get_contents($imagen);
+            if ($_POST['admin'] == 'Sí') {
+                $admin=1;
+            } elseif ($_POST['admin'] == 'No') {
+                $admin=0;
+            }
             
-            $resultado=modificarUsuario2($user, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil);
+            $resultado=modificarUsuario2($user, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil, $admin);
             if ($resultado===TRUE) {
                 echo "<script>alert('Usuario modificado correctamente');
                 window.onclose = window.location.href = '../principal.html';</script>";

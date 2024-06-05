@@ -32,7 +32,7 @@ unset($_SESSION['correo']);
             <header>
                 <h1>Modificar</h1>
             </header>
-            <form action="./php/pagina.php" method="post" id="formulario">
+            <form action="./php/pagina.php" method="post" id="formulario" enctype="multipart/form-data">
                 <input type="hidden" name="formulario" value="modificar">
                 <article class="datosPersonales">
                     <label for="usuario">Usuario: </label>
@@ -51,9 +51,9 @@ unset($_SESSION['correo']);
                     <input type="text" id="apellido" name="apellido" value="<?php echo htmlspecialchars($apellido); ?>" required placeholder="Apellidos:">
                 </article>
                 <label for="contraseña">Contraseña: </label>
-                <input type="password" id="passM" name="contrasena" placeholder="Contraseña:">
+                <input type="password" id="pass" name="contrasena" required placeholder="Contraseña:">
                 <label for="contraseña2">Confirma Contraseña: </label>
-                <input type="password" id="pass2M" placeholder="Contraseña:">
+                <input type="password" id="pass2" required placeholder="Contraseña:">
                 <label for="poblacion">Poblacion: </label>
                 <input type="text" id="poblacion" name="poblacion" value="<?php echo htmlspecialchars($poblacion); ?>" required placeholder="Poblacion:">
                 <label for="telefono">Telefono movil: </label>
@@ -62,8 +62,18 @@ unset($_SESSION['correo']);
                 <input type="date" id="fecha" name="fecha" value="<?php echo htmlspecialchars($fechaNacimiento); ?>" required>
                 <label for="perfil">Imagen de perfil: </label>
                 <input type="file" name="imagen" id="imagen" accept="image/png, image/jpeg, image/jpg">
+                <label for="Admin">Administrador?</label>                
+                <div class="radio">
+                    <label for="si">Sí</label>
+                    <input type="radio" value="Si" name="admin" id="si">
+                </div>
+                <div class="radio">
+                    <label for="no">No</label>
+                    <input type="radio" value="No" name="admin" id="no" checked>
+                </div>
+                
                 <article class="botones">
-                    <button type="submit" id="enviarModificar" class="btn">Enviar</button>
+                    <button type="submit" id="enviar" class="btn">Enviar</button>
                     <button type="reset" id="borrar" class="btn">Borrar</button>
                 </article>
 

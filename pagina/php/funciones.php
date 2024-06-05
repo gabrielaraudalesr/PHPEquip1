@@ -34,7 +34,7 @@ function comprobarLogin($user, $contrasena){
         mysqli_stmt_fetch($stmt);
         if (password_verify($contrasena, $dbPassword)) {
             header("Location: ../principal.html");
-            logAccesos($user);
+            //logAccesos($user);
             exit();
         }
     } else {
@@ -168,7 +168,7 @@ function eliminarUsuario($nombreUsuario){
     mysqli_stmt_bind_param($stmt, "s", $nombreUsuario);
     mysqli_stmt_execute($stmt);
     if (mysqli_stmt_affected_rows($stmt)>0) {
-        logEliminarUsuario($nombreUsuario);
+        //logEliminarUsuario($nombreUsuario);
         return TRUE;
     } else {
         return FALSE;
@@ -214,16 +214,17 @@ function modificarUsuario($nombreUsuario){
     $_SESSION['imagenPerfil'] = $imagenPerfil;
 }
 
-function modificarUsuario2($user, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil){
+function modificarUsuario2($user, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil, $admin){
     $conexion=conectarBD();
-    $imagenPerfil=file_get_contents($imagenPerfil);
-    $contrasena=encriptar($contrasena);
-    $consulta="UPDATE `usuarios` SET `nombreUsuario`='$user',`Nombre`='$nombre',`Apellido`='$apellido',`Contrasena`='$contrasena',`Poblacion`='$poblacion',`Telefono`='$telefono',`FechaNacimiento`='$fechaNacimiento',`ImagenPerfil`='$imagenPerfil' WHERE `Correo`='$correo';";
+    $pass=encriptar($contrasena);
+    
+    $consulta="UPDATE `usuarios` SET `nombreUsuario`=?,`Nombre`=?,`Apellido`=?,`Contrasena`=?,`Poblacion`=?,`Telefono`=?,`FechaNacimiento`=?,`ImagenPerfil`=?,`Administrador`=? WHERE `Correo`=?;";
     $stmt=mysqli_prepare($conexion, $consulta); 
+    mysqli_stmt_bind_param($stmt, "ssssssssss", $user, $nombre, $apellido, $pass, $poblacion, $telefono, $fechaNacimiento, $imagenPerfil, $admin, $correo);
     
     mysqli_stmt_execute($stmt);
     if (mysqli_stmt_affected_rows($stmt)>0) {
-        logModificarUsuario($correo);
+        //logModificarUsuario($correo);
         return TRUE;
     } else {
         return FALSE;
