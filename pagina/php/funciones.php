@@ -6,11 +6,22 @@ function comprobarLogin($user, $contrasena){
     $conexion=conectarBD();
     session_start();
     if (filter_var($user, FILTER_VALIDATE_EMAIL)) {
-        if ($user=="alejandroAdmin@gmail.com" || $user=="gabrielaAdmin@gmail.com" || $user=="vicentAdmin@gmail.com" || $user=="enriqueAdmin@gmail.com" || $user=="manelAdmin@gmail.com") {
-            $consulta = "SELECT Correo, Contrasena FROM usuarios WHERE Correo = ?";
+        $consulta = "SELECT Administrador FROM usuarios WHERE Correo = '$user'";
+        $resultado=mysqli_query($conexion, $consulta);
+        while ($fila=mysqli_fetch_array($resultado)) {
+            $esAdmin=$fila['Administrador'];
         }
-        
-    } 
+        if ($esAdmin==1) {
+            $consulta = "SELECT Correo, Contrasena FROM usuarios WHERE Correo = ?";        
+        } else {
+            $_SESSION['user_temp'] = isset($_POST['user']) ? $_POST['user'] : '';
+            $_SESSION['error']="El usuario no tiene permisos de administrador";
+            header("Location: ../login.php");
+            exit();
+        }
+    }
+
+    
 
     $stmt=mysqli_prepare($conexion, $consulta);
     mysqli_stmt_bind_param($stmt, 's', $user);
