@@ -140,11 +140,15 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER["REQUEST_METHOD"] == 'POST'){
             $correo=$_POST['correo'];
             $nombre=$_POST['nombre'];
             $apellido=$_POST['apellido'];
+            if (isset($_POST['contrasena'])) {
+                $contrasena=$_POST['contrasena'];
+            }
             $contrasena=$_POST['contrasena'];
             $poblacion=$_POST['poblacion'];
             $telefono=$_POST['telefono'];
             $fechaNacimiento=$_POST['fecha'];
-            $imagenPerfil=$_POST['imagen'];
+            $imagen=$_POST['imagen']['tmp_name'];
+            $imagenPerfil=file_get_contents($imagen);
             
             $resultado=modificarUsuario2($user, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil);
             if ($resultado===TRUE) {

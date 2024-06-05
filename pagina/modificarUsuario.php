@@ -51,9 +51,9 @@ unset($_SESSION['correo']);
                     <input type="text" id="apellido" name="apellido" value="<?php echo htmlspecialchars($apellido); ?>" required placeholder="Apellidos:">
                 </article>
                 <label for="contraseña">Contraseña: </label>
-                <input type="password" id="pass" name="contrasena" required placeholder="Contraseña:">
+                <input type="password" id="passM" name="contrasena" placeholder="Contraseña:">
                 <label for="contraseña2">Confirma Contraseña: </label>
-                <input type="password" id="pass2" required placeholder="Contraseña:">
+                <input type="password" id="pass2M" placeholder="Contraseña:">
                 <label for="poblacion">Poblacion: </label>
                 <input type="text" id="poblacion" name="poblacion" value="<?php echo htmlspecialchars($poblacion); ?>" required placeholder="Poblacion:">
                 <label for="telefono">Telefono movil: </label>
@@ -63,7 +63,7 @@ unset($_SESSION['correo']);
                 <label for="perfil">Imagen de perfil: </label>
                 <input type="file" name="imagen" id="imagen" accept="image/png, image/jpeg, image/jpg">
                 <article class="botones">
-                    <button type="submit" id="enviar" class="btn">Enviar</button>
+                    <button type="submit" id="enviarModificar" class="btn">Enviar</button>
                     <button type="reset" id="borrar" class="btn">Borrar</button>
                 </article>
 
