@@ -11,13 +11,6 @@ function conectarBD() {
     global $host, $usuario, $pass, $bd, $port;
     $conexion = mysqli_connect($host,$usuario,$pass,$bd,$port);
 
-    // Verificar conexión
-    if (!$conexion) {
-        //echo "<p>Conexion fallida</p> <br>";
-    } else {
-        //echo "<p>Conexion correcta</p> <br>";
-    }
-
     return $conexion;
 }
 

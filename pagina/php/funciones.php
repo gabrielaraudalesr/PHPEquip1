@@ -5,11 +5,12 @@ include './datos.php';
 function comprobarLogin($user, $contrasena){
     $conexion=conectarBD();
     session_start();
-    if (filter_var($user, FILTER_VALIDATE_EMAIL)) {        
-        $consulta = "SELECT Correo, Contrasena FROM usuarios WHERE Correo = ?";
-    } else {
-        $consulta = "SELECT nombreUsuario, Contrasena FROM usuarios WHERE nombreUsuario = ?";
-    }
+    if (filter_var($user, FILTER_VALIDATE_EMAIL)) {
+        if ($user=="alejandroAdmin@gmail.com" || $user=="gabrielaAdmin@gmail.com" || $user=="vicentAdmin@gmail.com" || $user=="enriqueAdmin@gmail.com" || $user=="manelAdmin@gmail.com") {
+            $consulta = "SELECT Correo, Contrasena FROM usuarios WHERE Correo = ?";
+        }
+        
+    } 
 
     $stmt=mysqli_prepare($conexion, $consulta);
     mysqli_stmt_bind_param($stmt, 's', $user);
@@ -72,7 +73,7 @@ function listarUsuarios(){
             
             $imagenPerfil='<img src="data:image/png;base64,'. base64_encode($imagenData) .'", "data:image/jpeg;base64,'. base64_encode($imagenData) .'", "data:image/jpg;base64,'. base64_encode($imagenData) . '" style="width: 20%; height:20%;"/>';
             
-        $lista .= "<tr><td>" . $id . "</td><td>" . $user . "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contrasena . "</td><td>" . $poblacion . "</td><td>" . $telefono . "</td><td>" .$fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr>"; 
+        $lista .= "<tr><td>" . $id . "</td><td>" . $user . "</td><td>" . $nombre . "</td><td>" . $apellido . "</td><td>" . $contrasena . "</td><td>" . $poblacion . "</td><td>" . $telefono . "</td><td>" . $fechaNacimiento . "</td><td>" . $correo . "</td><td>" . $imagenPerfil . "</td></tr>"; 
             
         }
         $lista.="</tbody></table>";
