@@ -1,0 +1,4 @@
+[05-06-2024 12:03:33] El usuario enrique@gmail.com ha accedido a la página de administración. 
+[05-06-2024 12:16:22] Se ha eliminado al usuario con correo: botella@gmail.com. 
+[05-06-2024 12:17:25] Se han modificado los datos del usuario con correo: enrique@gmail.com. 
+[05-06-2024 12:19:14] Se ha eliminado al usuario con correo: t@gmail.com. 

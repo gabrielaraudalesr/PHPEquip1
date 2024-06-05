@@ -34,7 +34,7 @@ function comprobarLogin($user, $contrasena){
         mysqli_stmt_fetch($stmt);
         if (password_verify($contrasena, $dbPassword)) {
             header("Location: ../principal.html");
-            //logAccesos($user);
+            logAccesos($user);
             exit();
         }
     } else {
@@ -48,15 +48,13 @@ function comprobarLogin($user, $contrasena){
 }
 
 function logAccesos($user){
-    $conexion=conectarBD();
-    $consulta="INSERT INTO logs (Accion, `Fecha-Hora`) VALUES (?, ?);";
-    $stmt=mysqli_prepare($conexion, $consulta);
-    $now=date('Y-m-d H:i:s');
-    $accion="El usuario $user ha accedido a la página de administración";
-    mysqli_stmt_bind_param($stmt, "ss", $accion, $now);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-    mysqli_close($conexion);
+    $rutaLog="../Logs/log.txt";   
+    $fechaHora=date('d-m-Y H:i:s');
+    $mensaje="[$fechaHora] El usuario $user ha accedido a la página de administración. \n";
+    
+    $archivo= fopen($rutaLog, 'a');
+    fwrite($archivo, $mensaje);
+    fclose($archivo);
 }
 
 
@@ -118,15 +116,12 @@ function agregarUsuario($nombreUsuario, $nombre, $apellido, $contrasena, $poblac
 
 
 function logCrearUsuario($nombreUsuario, $correo){
-    $conexion=conectarBD();
-    $consulta="INSERT INTO logs (Accion, `Fecha-Hora`) VALUES (?, ?);";
-    $stmt=mysqli_prepare($conexion, $consulta);
-    $now=date('Y-m-d H:i:s');
-    $accion="Se ha añadido al usuario con correo: $correo, nombre de usuario: $nombreUsuario";
-    mysqli_stmt_bind_param($stmt, "ss", $accion, $now);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-    mysqli_close($conexion);
+    $rutaLog="../Logs/log.txt";   
+    $fechaHora=date('d-m-Y H:i:s');
+    $mensaje="[$fechaHora] Se ha añadido al usuario con correo: $correo y nombre de usuario: $nombreUsuario. \n";    
+    $archivo= fopen($rutaLog, 'a');
+    fwrite($archivo, $mensaje);
+    fclose($archivo);
 }
 
 
@@ -139,25 +134,27 @@ function encriptar($password){
 
 
 function mostrarLog(){
-    $conexion=conectarBD();
-    $consulta="SELECT * FROM logs";
-    $resultado=mysqli_query($conexion, $consulta);
     
-    $tabla="<table border=1 style='border-collapse: collapse;'><thead><tr><th>ID</th><th>Accion</th><th>Fecha-Hora</th></thead><tbody>";
-    while($fila=mysqli_fetch_array($resultado)){
-        $id=$fila["Id"];
-        $accion=$fila["Accion"];
-        $fechaHora=$fila["Fecha-Hora"];
+    $archivo=fopen("../Logs/log.txt", 'r');
+
+    $tabla="<table border=1 style='border-collapse: collapse;'><thead><tr><th>#</th><th>Mensaje</th></thead><tbody>";
+        $lineaNumero=1;
+        while (($linea = fgets($archivo)) !== false) {
+            $tabla .= "<tr><td>" . $lineaNumero . "</td><td>" . $linea . "</td></tbody>";
+            $lineaNumero++;
+        }
+        fclose($archivo);
+
             
-        $tabla .= "<tr><td>" . $id . "</td><td>" . $accion . "</td><td>" . $fechaHora . "</td></tr></tbody>";
-    }
+        
+    
     $tabla .= "</table>";
 
     return $tabla;
 
         
     
-    mysqli_close($conexion);
+    
 }
 
 
@@ -168,7 +165,7 @@ function eliminarUsuario($nombreUsuario){
     mysqli_stmt_bind_param($stmt, "s", $nombreUsuario);
     mysqli_stmt_execute($stmt);
     if (mysqli_stmt_affected_rows($stmt)>0) {
-        //logEliminarUsuario($nombreUsuario);
+        logEliminarUsuario($nombreUsuario);
         return TRUE;
     } else {
         return FALSE;
@@ -178,15 +175,12 @@ function eliminarUsuario($nombreUsuario){
 }
 
 function logEliminarUsuario($correo){
-    $conexion=conectarBD();
-    $consulta="INSERT INTO logs (Accion, `Fecha-Hora`) VALUES (?, ?);";
-    $stmt=mysqli_prepare($conexion, $consulta);
-    $now=date('Y-m-d H:i:s');
-    $accion="Se ha eliminado al usuario con correo: $correo";
-    mysqli_stmt_bind_param($stmt, "ss", $accion, $now);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-    mysqli_close($conexion);
+    $rutaLog="../Logs/log.txt";   
+    $fechaHora=date('d-m-Y H:i:s');
+    $mensaje="[$fechaHora] Se ha eliminado al usuario con correo: $correo. \n";
+    $archivo= fopen($rutaLog, 'a');
+    fwrite($archivo, $mensaje);
+    fclose($archivo);
 }
 
 function modificarUsuario($nombreUsuario){
@@ -224,7 +218,7 @@ function modificarUsuario2($user, $nombre, $apellido, $contrasena, $poblacion, $
     
     mysqli_stmt_execute($stmt);
     if (mysqli_stmt_affected_rows($stmt)>0) {
-        //logModificarUsuario($correo);
+        logModificarUsuario($correo);
         return TRUE;
     } else {
         return FALSE;
@@ -234,15 +228,12 @@ function modificarUsuario2($user, $nombre, $apellido, $contrasena, $poblacion, $
 }
 
 function logModificarUsuario($correo){
-    $conexion=conectarBD();
-    $consulta="INSERT INTO logs (Accion, `Fecha-Hora`) VALUES (?, ?);";
-    $stmt=mysqli_prepare($conexion, $consulta);
-    $now=date('Y-m-d H:i:s');
-    $accion="Se han modificado los datos del usuario con correo: $correo";
-    mysqli_stmt_bind_param($stmt, "ss", $accion, $now);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-    mysqli_close($conexion);
+    $rutaLog="../Logs/log.txt";   
+    $fechaHora=date('d-m-Y H:i:s');
+    $mensaje="[$fechaHora] Se han modificado los datos del usuario con correo: $correo. \n";
+    $archivo= fopen($rutaLog, 'a');
+    fwrite($archivo, $mensaje);
+    fclose($archivo);
 }
 
 function crearBackup(){
