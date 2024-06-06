@@ -105,8 +105,8 @@ function agregarUsuario($nombreUsuario, $nombre, $apellido, $contrasena, $poblac
     mysqli_stmt_bind_param($stmt, "sssssssss", $nombreUsuario, $nombre, $apellido, $contrasena, $poblacion, $telefono, $fechaNacimiento, $correo, $imagenPerfil);
     
     if (mysqli_stmt_execute($stmt) === TRUE) {
-        logCrearUsuario($nombreUsuario, $correo);
-        echo "<script>window.location.replace('./principal.html')</script>";
+        //logCrearUsuario($nombreUsuario, $correo);
+        header("Location: ../principal.html");
     } else {
         //print "<p>Persona registrada incorrectamente</p>";
     }
@@ -165,7 +165,7 @@ function eliminarUsuario($nombreUsuario){
     mysqli_stmt_bind_param($stmt, "s", $nombreUsuario);
     mysqli_stmt_execute($stmt);
     if (mysqli_stmt_affected_rows($stmt)>0) {
-        logEliminarUsuario($nombreUsuario);
+        //logEliminarUsuario($nombreUsuario);
         return TRUE;
     } else {
         return FALSE;
